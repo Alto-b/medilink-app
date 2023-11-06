@@ -192,7 +192,7 @@ class _SignUpPageState extends State<SignUpPage> {
                    setState(() {
                      
                    });
-                    //Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                //Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
 
                 },
                  style:ElevatedButton.styleFrom(
@@ -332,7 +332,7 @@ String? validatepassword(String? value){
   return null;
 }
 
-//to validate confrim password
+//to validate conform password
 String? validatecpassword(String? value){
   final trimmedValue = value?.trim();
 
@@ -385,7 +385,7 @@ void showSnackBar(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(message),
-      duration: Duration(seconds: 3), // Set the duration for how long the Snackbar is visible
+      duration: Duration(seconds: 3), 
     ),
   );
 }

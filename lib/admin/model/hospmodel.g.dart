@@ -18,7 +18,7 @@ class HospModelAdapter extends TypeAdapter<HospModel> {
     };
     return HospModel(
       hosp: fields[1] as String,
-      id: fields[0] as int?,
+      id: fields[0] as int,
     );
   }
 

@@ -6,10 +6,10 @@ part 'hospmodel.g.dart';
 class HospModel extends HiveObject{
 
   @HiveField(0)  
-    int? id;
+    int id;
 
   @HiveField(1)
   final String hosp;
 
-  HospModel({required this.hosp,this.id});
+  HospModel({required this.hosp,required this.id});
 } 

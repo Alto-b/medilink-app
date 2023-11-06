@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:medilink/user/pages/aboutus.dart';
-import 'package:medilink/user/pages/bookappointment.dart';
-import 'package:medilink/user/pages/myappointments.dart';
+import 'package:medilink/user/pages/about_us.dart';
+import 'package:medilink/user/pages/book_appointment.dart';
+import 'package:medilink/user/pages/my_appointments.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -77,7 +77,75 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      //book an appointment
+                       //our hospitals
+                      //SizedBox(width: 20,),
+                      Container(
+                        alignment: Alignment.center,
+                        height: 100,width: 100,
+                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20),
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: Colors.red,
+                        //     offset: Offset(0, 4),
+                        //     blurRadius: 10,
+                        //     spreadRadius: -3
+                        //   )
+                        // ]
+                        ) ,
+                        child: Column(children: [
+                          TextButton(onPressed: (){}, child: Column(
+                            children: [
+                              Icon(Icons.business,size: 50,),
+                              Text("Our ",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                              Text(" hospitals",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                            ],
+                          ))
+                        ]),
+                      ),
+                      //our doctors
+                      Container(
+                        alignment: Alignment.center,
+                        height: 100,width: 100,
+                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        child: Column(children: [
+                          TextButton(onPressed: (){}, child: Column(
+                            children: [
+                              Icon(Icons.star_border,size: 50,),
+                              Text("Our",style: TextStyle(fontSize:11),textAlign: TextAlign.center),
+                              Text("Specializations",style: TextStyle(fontSize: 10.5),textAlign: TextAlign.center),
+                            ],
+                          ))
+                        ]),
+                      ),
+                      //our doctors
+                      Container(
+                        alignment: Alignment.center,
+                        height: 100,width: 100,
+                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        child: Column(children: [
+                          TextButton(onPressed: (){}, child: Column(
+                            children: [
+                              Icon(Icons.group_outlined,size: 50,),
+                              Text("Our ",style: TextStyle(fontSize:11),textAlign: TextAlign.center),
+                              Text(" Doctors",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                            ],
+                          ))
+                        ]),
+                      ),
+                     
+                    ],
+                  ),SizedBox(height: 20,),
+
+                  //row 2
+
+                   Row(                
+                    //children: [ SizedBox(width: 15,) , Text("F&Q",style: TextStyle(color: const Color.fromARGB(255, 0, 50, 92)),)],
+                  ),
+                  SizedBox(height: 20,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                     //book an appointment
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
@@ -93,49 +161,6 @@ class _HomePageState extends State<HomePage> {
                           ))
                         ]),
                       ),
-                      //our doctors
-                      Container(
-                        alignment: Alignment.center,
-                        height: 100,width: 100,
-                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
-                        child: Column(children: [
-                          TextButton(onPressed: (){}, child: Column(
-                            children: [
-                              Icon(Icons.group,size: 50,),
-                              Text("Our ",style: TextStyle(fontSize:11),textAlign: TextAlign.center),
-                              Text(" Doctors",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
-                            ],
-                          ))
-                        ]),
-                      ),
-                      //our hospitals
-                      //SizedBox(width: 20,),
-                      Container(
-                        alignment: Alignment.center,
-                        height: 100,width: 100,
-                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
-                        child: Column(children: [
-                          TextButton(onPressed: (){}, child: Column(
-                            children: [
-                              Icon(Icons.business,size: 50,),
-                              Text("Our ",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
-                              Text(" hospitals",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
-                            ],
-                          ))
-                        ]),
-                      ),
-                    ],
-                  ),SizedBox(height: 20,),
-
-                  //row 2
-
-                   Row(                
-                    //children: [ SizedBox(width: 15,) , Text("F&Q",style: TextStyle(color: const Color.fromARGB(255, 0, 50, 92)),)],
-                  ),
-                  SizedBox(height: 20,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
                       //my appointment
                       Container(
                         alignment: Alignment.center,
@@ -154,7 +179,74 @@ class _HomePageState extends State<HomePage> {
                           ))
                         ]),
                       ),
+                      //our doctors
+                      Container(
+                        alignment: Alignment.center,
+                        height: 100,width: 100,
+                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        //color: Colors.red,
+                        child: Column(children: [
+                          // Icon(Icons.schedule),
+                          TextButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUsPage(),));                          }, child: Column(
+                            children: [
+                              Icon(Icons.feedback_outlined,size: 50,),
+                              Text("Feedback",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                              //Text(" ",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                            ],
+                          ))
+                        ]),
+                      ),
+                      //our hospitals
+                      //SizedBox(width: 20,),
+                      // Container(
+                      //   alignment: Alignment.center,
+                      //   height: 100,width: 100,
+                      //   decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                      //   //color: Colors.red,
+                      //   child: Column(children: [
+                      //     // Icon(Icons.schedule),
+                      //     TextButton(onPressed: (){}, child: Column(
+                      //       children: [
+                      //         Icon(Icons.business,size: 50,),
+                      //         Text("Our ",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                      //         Text(" hospitals",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                      //       ],
+                      //     ))
+                      //   ]),
+                      // ),
+                    ],
+                  ),SizedBox(height: 20,),
+
+                  //row 3
+
+                   Row(                
+                    //children: [ SizedBox(width: 15,) , Text("F&Q",style: TextStyle(color: const Color.fromARGB(255, 0, 50, 92)),)],
+                  ),
+                  SizedBox(height: 20,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      //my appointment
+                      // Container(
+                      //   alignment: Alignment.center,
+                      //   height: 100,width: 100,
+                      //   decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                      //   //color: Colors.red,
+                      //   child: Column(children: [
+                      //     // Icon(Icons.schedule),
+                      //     TextButton(onPressed: (){
+                      //       Navigator.push(context, MaterialPageRoute(builder: (context) => MyAppointments(),));
+                      //     }, child: Column(
+                      //       children: [
+                      //         Icon(Icons.schedule_rounded,size: 50,),
+                      //         Text("My Appointments",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                      //       ],
+                      //     ))
+                      //   ]),
+                      // ),
                       //feedback
+                      SizedBox(width: 20,),
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
@@ -169,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ))
                         ]),
-                      ),
+                      ),SizedBox(width: 15,),
                       //our doctors
                       Container(
                         alignment: Alignment.center,
@@ -207,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                       //   ]),
                       // ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -219,7 +311,8 @@ class _HomePageState extends State<HomePage> {
 
         //floating action button to dialer
       floatingActionButton: FloatingActionButton(
-        mini: true,
+        shape: CircleBorder(),
+        //mini: true,
         backgroundColor: Colors.red[400],
         onPressed: () {
           _launchDialer('123456789'); // Replace '123456789' with the specific number

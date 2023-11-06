@@ -32,13 +32,16 @@ class _DepartmentPageState extends State<DepartmentPage> {
       }
       else{
       //print('$_dept');
-      final _department=DepartmentModel( dept: _dept);
+      final _department=DepartmentModel( dept: _dept,id:-1);
       addDepartment(_department);
       }
     }
 
   @override
   Widget build(BuildContext context) {
+
+    getDepartment();
+
     return Scaffold(
       
       //appbar
@@ -80,6 +83,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 ElevatedButton(onPressed: (){
                   //print("add button clicked");
                   addDepartmentButton();
+                  _departmentController.clear();
                 },
                  child: Text("Add")),
                  SizedBox(height: 40,)

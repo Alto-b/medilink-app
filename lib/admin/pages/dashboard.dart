@@ -152,7 +152,7 @@ class _DashBoardState extends State<DashBoard> {
             childAspectRatio: .90,
             children: List.generate(titles.length, (index) {
               return InkWell(
-                onLongPress: (){
+                onTap: (){
                   Navigator.of(context).push(
                         MaterialPageRoute(builder:pageBuilders[index],)
                        );

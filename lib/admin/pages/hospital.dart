@@ -94,7 +94,7 @@ class _HospitalPageState extends State<HospitalPage> {
                               ),
                               //delete
                               SlidableAction(onPressed: (context) {
-                                deleteHosp(data.id!);
+                              deleteHosp(data.id);
                                 _hospitalController.clear();
                               },
                               icon:Icons.delete,
@@ -129,7 +129,7 @@ class _HospitalPageState extends State<HospitalPage> {
     if(_hosp.isEmpty){
       return ;
     }
-    final _hospital = HospModel(hosp: _hosp);
+    final _hospital = HospModel(hosp: _hosp,id: -1);
     //print(_hosp);
     addHosp(_hospital);
   }

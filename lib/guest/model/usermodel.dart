@@ -3,8 +3,8 @@
 import 'package:hive/hive.dart';
 part 'usermodel.g.dart';
 
-@HiveType(typeId: 0)
-class UserModel extends HiveObject{
+@HiveType(typeId: 2)
+class UserModel{
 
   @HiveField(0)
   int? id;
