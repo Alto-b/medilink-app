@@ -81,17 +81,29 @@ class _HospitalPageState extends State<HospitalPage> {
                           final data = hospitalList[index];
 
                         return Slidable(
+                          endActionPane: ActionPane(
+                            motion: DrawerMotion(), 
+                            children:[
+                              //edit
+                              SlidableAction(onPressed: (context) {
+                                //DepartmentModel _deptname=_departmentController.text as DepartmentModel;
+                                //editDept(data.id!,deptname );
+                              },
+                              icon:Icons.edit,
+                              backgroundColor: Color.fromARGB(255, 10, 112, 196),
+                              ),
+                              //delete
+                              SlidableAction(onPressed: (context) {
+                                deleteHosp(data.id!);
+                                _hospitalController.clear();
+                              },
+                              icon:Icons.delete,
+                              backgroundColor: Color.fromARGB(255, 248, 3, 3),
+                              ),
+                             ]),
                           child: ListTile(
                             leading: Text("${index+1}"),
                             title: Text(data.hosp),
-                            trailing: IconButton(onPressed: (){
-                              if(data.id!=null){
-                                deleteHosp(data.id!);
-                              }
-                              else{
-                               // print("hospital id is null");
-                              }
-                            }, icon: Icon(Icons.delete)),
                           ),
                         );
                       }, 

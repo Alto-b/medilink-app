@@ -113,6 +113,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                               //delete
                               SlidableAction(onPressed: (context) {
                                 deleteDept(data.id!);
+                                _departmentController.clear();
                               },
                               icon:Icons.delete,
                               backgroundColor: Color.fromARGB(255, 248, 3, 3),

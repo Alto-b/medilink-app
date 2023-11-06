@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:medilink/admin/model/deptmodel.dart';
 import 'package:medilink/admin/model/hospmodel.dart';
+import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/splash.dart';
 
 
@@ -14,15 +15,19 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
-  //await Hive.openBox('dept_db');
+
    Hive.openBox<DepartmentModel>('dept_db');
    Hive.openBox<HospModel>('hosp_db');
+   Hive.openBox<UserModel>('user_db');
   
   if(!Hive.isAdapterRegistered(DepartmentModelAdapter().typeId)){
       Hive.registerAdapter(DepartmentModelAdapter());
   }
-    if(!Hive.isAdapterRegistered(HospModelAdapter().typeId)){
+  if(!Hive.isAdapterRegistered(HospModelAdapter().typeId)){
       Hive.registerAdapter(HospModelAdapter());
+  }
+  if(!Hive.isAdapterRegistered(UserModelAdapter().typeId)){
+    Hive.registerAdapter(UserModelAdapter());
   }
   runApp(const MyApp());
 }

@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
 
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:medilink/admin/pages/dashboard.dart';
+import 'package:medilink/guest/db/user_functions.dart';
+import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/login.dart';
 import 'package:email_auth/email_auth.dart';
 import 'package:medilink/user/mainpage.dart';
@@ -17,46 +19,47 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
 
-  late EmailAuth emailAuth;
+  //late EmailAuth emailAuth;
 
    @override
-  void initState() {
-    super.initState();
-    // Initialize the package
-    emailAuth =  EmailAuth(
-      sessionName: "Signup session",
-    );
-  }
+  // void initState() {
+  //   super.initState();
+  //   // Initialize the package
+  //   emailAuth =  EmailAuth(
+  //     sessionName: "Signup session",
+  //   );
+  // }
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController=TextEditingController();
   final TextEditingController _dobController=TextEditingController();
   String? selectedGender;
   final List<String> genderOptions = ['Male', 'Female', 'Others'];
-  // final TextEditingController _genderController=TextEditingController();
+  //final TextEditingController _genderController=TextEditingController();
   final TextEditingController _emailController=TextEditingController();
-  final TextEditingController _otpController=TextEditingController();
+  final TextEditingController _passwordController=TextEditingController();
+  final TextEditingController _cpasswordController=TextEditingController();
 
 
-  // a Boolean function to verify if the Data provided is true
-   verify() {
-    print(emailAuth.validateOtp(
-        recipientMail: _emailController.value.text,
-        userOtp: _otpController.value.text)
-        );
-  }
+  //a Boolean function to verify if the Data provided is true
+  //  verify() {
+  //   print(emailAuth.validateOtp(
+  //       recipientMail: _emailController.value.text,
+  //       userOtp: _otpController.value.text)
+  //       );
+  // }
 
-    void sendOtp() async {
-    bool result = await emailAuth.sendOtp(
-        recipientMail: _emailController.value.text, otpLength: 5);
-    if (result) {
-      // using a void function because i am using a 
-      // stateful widget and seting the state from here.
-      setState(() {
-        bool submitValid = true;
-      });
-    }
-  }
+  //   void sendOtp() async {
+  //   bool result = await emailAuth.sendOtp(
+  //       recipientMail: _emailController.value.text, otpLength: 5);
+  //   if (result) {
+  //     // using a void function because i am using a 
+  //     // stateful widget and seting the state from here.
+  //     setState(() {
+  //       bool submitValid = true;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             Image.network('https://i.ibb.co/YZWjL9Y/Screenshot-2023-10-22-204311-removebg-preview.png',
                 width: 200,),
-            SizedBox(height: 40,),
+            SizedBox(height: 30,),
             Form(
               key: _formKey,
               child: Column(
@@ -100,6 +103,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   },
                   controller: _dobController,
                   decoration: InputDecoration(
+                    //label: Text("dob"),
                     hintText: "Date Of Birth"
                   ),
                   readOnly: true,
@@ -128,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   }).toList() ,
                    onChanged: (String? newValue){
                     setState(() {
-                      selectedGender=newValue;
+                      selectedGender=newValue!;
                     });
                    },
                    decoration: InputDecoration(
@@ -143,28 +147,51 @@ class _SignUpPageState extends State<SignUpPage> {
                   keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   decoration: InputDecoration(
-                    hintText: "email"
+                    hintText: "Email"
                   ),
                 ),
                 //otp
-                TextButton(onPressed: (){
-                  sendOtp();
-                }, child: Text("get OTP")),
+                // TextButton(onPressed: (){
+                //    //sendOtp();
+                // }, child: Text("get OTP")),
 
                 //for otp entry
-                TextFormField(
-                  controller: _otpController,
+                // TextFormField(
+                //   controller: _otpController,
+                //   decoration: InputDecoration(
+                //     hintText: "enter OTP"
+                //   ),
+                // ),
+                //  TextButton(onPressed: (){
+                //    //verify();
+                // }, child: Text("verify OTP")),
+               SizedBox(height: 30,),
+               //password
+               TextFormField(
+                  validator:validatepassword ,
+                  keyboardType: TextInputType.emailAddress,
+                  controller: _passwordController,
                   decoration: InputDecoration(
-                    hintText: "enter OTP"
+                    hintText: "Password"
                   ),
                 ),
-                 TextButton(onPressed: (){
-                  verify();
-                }, child: Text("verify OTP")),
-               SizedBox(height: 30,),
+                 SizedBox(height: 30,),
+               //confirm password
+               TextFormField(
+                  validator: validatecpassword ,
+                  keyboardType: TextInputType.emailAddress,
+                  controller: _cpasswordController,
+                  decoration: InputDecoration(
+                    hintText: "Confirm Password"
+                  ),
+                ),
+                SizedBox(height: 20,),
 
                ElevatedButton(onPressed: (){
-                   loginCheck();
+                   addUserbutton();
+                   setState(() {
+                     
+                   });
                     //Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
 
                 },
@@ -206,31 +233,33 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  void loginCheck() {
-  // Check if the form is valid
-  if (_formKey.currentState!.validate()) {
-    // All form fields are valid, proceed with the login or registration logic here
-    // You can access the form field values using the respective controllers
-    final String fullName = _nameController.text;
-    final String dateOfBirth = _dobController.text;
-    final String gender = selectedGender ?? ""; // Gender can be null
-    final String email = _emailController.text;
-    final String otp = _otpController.text;
+//   void signup() {
+//   // Check if the form is valid
+//   if (_formKey.currentState!.validate() && _passwordController.text==_cpasswordController.text) {
+//     final String fullName = _nameController.text;
+//     final String dateOfBirth = _dobController.text;
+//     final String gender = selectedGender ?? ""; 
+//     final String email = _emailController.text;
+//     final String pass = _passwordController.text;
+//     final String cpass = _cpasswordController.text;
 
-    // Perform your logic here, e.g., API requests, registration, etc.
+//   final _user=UserModel(fullname: fullName, dob: dateOfBirth, gender: gender, email: email, password: pass);
+//   addUSer(_user);
+//   print("user added");
+//   setState(() {
+    
+//   });
 
-    // For example, you can print the values for testing
-    print('Full Name: $fullName');
-    print('Date of Birth: $dateOfBirth');
-    print('Gender: $gender');
-    print('Email: $email');
-    print('OTP: $otp');
+//     // print('Full Name: $fullName');
+//     // print('Date of Birth: $dateOfBirth');
+//     // print('Gender: $gender');
+//     // print('Email: $email');
+//     // print('Password: $pass');
+//     // print('cPassword: $cpass');
 
-    // After successful registration or login, you can navigate to the next screen.
-    // Replace 'NextScreen' with the screen you want to navigate to.
-    //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-  }
-}
+//     //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+//   }
+// }
 
 
 
@@ -257,7 +286,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
 //to validate full name
 String? validateFullName(String? value) {
-  // Trim the value to remove leading and trailing spaces
+  
   final trimmedValue = value?.trim();
 
   if (trimmedValue == null || trimmedValue.isEmpty) {
@@ -270,12 +299,12 @@ String? validateFullName(String? value) {
     return 'Full Name can only contain letters and spaces';
   }
 
-  return null; // Return null if the Full Name is valid
+  return null; 
 }
 
 //to validate email
 String? validateEmail(String? value) {
-  // Trim the value to remove leading and trailing spaces
+  
   final trimmedValue = value?.trim();
 
   if (trimmedValue == null || trimmedValue.isEmpty) {
@@ -290,8 +319,75 @@ String? validateEmail(String? value) {
     return 'Invalid email address';
   }
 
-  return null; // Return null if the email is valid
+  return null; 
 }
 
+//to validate password
+String? validatepassword(String? value){
+  final trimmedValue = value?.trim();
+
+  if(trimmedValue == null || trimmedValue.isEmpty){
+    return 'Cannot be empty';
+  }
+  return null;
+}
+
+//to validate confrim password
+String? validatecpassword(String? value){
+  final trimmedValue = value?.trim();
+
+  if(trimmedValue == null || trimmedValue.isEmpty){
+    return 'Cannot be empty';
+  }
+  if(trimmedValue!=_passwordController.text){
+    return 'Password must watch';
+  }
+  return null;
+}
+
+// //to sign up user
+
+// Future<void> userAddButton()async{
+
+//   final _name=_nameController.text.trim();
+//   final _dob=_dobController.text.trim();
+//   final _gender=selectedGender;
+//   final _email=_emailController.text.trim();
+//   final _password=_passwordController.text.trim();
+
+//   final _user=UserModel(fullname: _name, dob: _dob, gender: _gender, email: _email, password: _password);
+//   addUSer(_user);
+// }
+
+//to add user
+    Future<void> addUserbutton() async{
+      final String fullName = _nameController.text.trim();
+    final String dateOfBirth = _dobController.text.trim();
+    final String gender = selectedGender ?? ""; 
+    final String email = _emailController.text.trim();
+    final String pass = _passwordController.text.trim();
+    final String cpass = _cpasswordController.text.trim();
+
+      if(_formKey.currentState!.validate() && _passwordController.text==_cpasswordController.text){
+        //print('empty');
+        //print('$_dept');
+      final _user=UserModel(fullname: fullName, dob: dateOfBirth, gender: gender, email: email, password: pass);
+      addUser(_user);
+       
+      }
+      else{
+        showSnackBar(context, 'User registration failed!');
+      }
+    }
+
+//code for snackbar    
+void showSnackBar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+      duration: Duration(seconds: 3), // Set the duration for how long the Snackbar is visible
+    ),
+  );
+}
 
 }

@@ -5,6 +5,7 @@ import 'package:medilink/admin/model/hospmodel.dart';
 
 ValueNotifier<List<HospModel>> hospListNotifier=ValueNotifier([]);
 
+//to add hospitals
 Future<void> addHosp(HospModel value) async{
   final hospDB = await Hive.openBox<HospModel>('hosp_db');
   final _id = await hospDB.add(value);
@@ -15,6 +16,7 @@ Future<void> addHosp(HospModel value) async{
 
 }
 
+//to get hospitals
 Future<void> getHosp() async{
   final hospDB = await Hive.openBox<HospModel>('hosp_db');
   hospListNotifier.value.clear();
@@ -23,6 +25,7 @@ Future<void> getHosp() async{
  
 }
 
+//to delete hospitals
 Future<void> deleteHosp(int id)async{
   final hospDB = await Hive.openBox<HospModel>('hosp_db');
   if(hospDB.isOpen){

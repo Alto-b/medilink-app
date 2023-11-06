@@ -10,10 +10,9 @@ ValueNotifier<List<DepartmentModel>> deptListNotifier=ValueNotifier([]);
 
 //to add departments
 Future<void> addDepartment(DepartmentModel value) async{
-  final deptBox = await Hive.openBox<DepartmentModel>('dept_box');
-  final id=await deptBox.add(value);
-  value.id=id;
-
+  final deptBox = await Hive.openBox<DepartmentModel>('dept_db');
+  final _id=await deptBox.add(value);
+  value.id=_id;
   deptListNotifier.value.add(value);
   deptListNotifier.notifyListeners();
 }
@@ -22,7 +21,6 @@ Future<void> addDepartment(DepartmentModel value) async{
 Future<void> getDepartment() async{
   final deptDB = await Hive.openBox<DepartmentModel>('dept_db');
   deptListNotifier.value.clear();
-
   deptListNotifier.value.addAll(deptDB.values);
   deptListNotifier.notifyListeners();
 }
@@ -30,7 +28,13 @@ Future<void> getDepartment() async{
 //to delete departments
 Future<void> deleteDept(int id) async{
   final deptDB = await Hive.openBox<DepartmentModel>('dept_db');
-  await deptDB.delete(id);
+    if(deptDB.isOpen){
+    //print("hospital db is open before deletion");
+    await deptDB.delete(id);
+   
   getDepartment();
-  deptListNotifier.notifyListeners();
+  }
+  else{
+    //print("hospital db is not open before deletion");
+  }
 }
