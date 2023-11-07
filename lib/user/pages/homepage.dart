@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:medilink/user/pages/about_us.dart';
 import 'package:medilink/user/pages/book_appointment.dart';
+import 'package:medilink/user/pages/hospitals.dart';
 import 'package:medilink/user/pages/my_appointments.dart';
+import 'package:medilink/user/pages/specializations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -93,7 +95,9 @@ class _HomePageState extends State<HomePage> {
                         // ]
                         ) ,
                         child: Column(children: [
-                          TextButton(onPressed: (){}, child: Column(
+                          TextButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HospitalPage(),));
+                          }, child: Column(
                             children: [
                               Icon(Icons.business,size: 50,),
                               Text("Our ",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
@@ -108,7 +112,9 @@ class _HomePageState extends State<HomePage> {
                         height: 100,width: 100,
                         decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
                         child: Column(children: [
-                          TextButton(onPressed: (){}, child: Column(
+                          TextButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => SpecializationPage(),));
+                          }, child: Column(
                             children: [
                               Icon(Icons.star_border,size: 50,),
                               Text("Our",style: TextStyle(fontSize:11),textAlign: TextAlign.center),

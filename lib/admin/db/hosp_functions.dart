@@ -32,3 +32,17 @@ Future<void> deleteHosp(int id)async{
 
 }
 
+//to search departments
+Future<List<HospModel>> searchDepartments(String keyword) async {
+  final hospDB = await Hive.openBox<HospModel>('dept_db');
+  final hospitals = await hospDB.values.toList();
+
+  // Use the `where` method to filter the data based on the search criteria
+  final filteredHospitals = hospitals.where((hospital) {
+    // Modify the condition based on your search criteria
+    return hospital.hosp.contains(keyword);
+  }).toList();
+
+  return filteredHospitals;
+}
+

@@ -1,31 +1,28 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:medilink/admin/db/dept_functions.dart';
-import 'package:medilink/admin/model/deptmodel.dart';
+import 'package:medilink/admin/db/hosp_functions.dart';
+import 'package:medilink/admin/model/hospmodel.dart';
 
-class SpecializationPage extends StatefulWidget {
-  const SpecializationPage({super.key});
+class HospitalPage extends StatefulWidget {
+  const HospitalPage({super.key});
 
   @override
-  State<SpecializationPage> createState() => _SpecializationPageState();
+  State<HospitalPage> createState() => _HospitalPageState();
 }
 
-class _SpecializationPageState extends State<SpecializationPage> {
+class _HospitalPageState extends State<HospitalPage> {
 
 final  TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
-    getDepartment();
-    
     return Scaffold(
 
+      //appbar
       appBar: AppBar(
-        title: Text("Our Specializations"),
-      ),
-
+        title: Text("Our hospitals"),
+      ) ,
 
       body:SingleChildScrollView(
         child: Center(
@@ -45,7 +42,7 @@ final  TextEditingController _searchController = TextEditingController();
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50)
                         ),
-                        hintText: "Search specializations"
+                        hintText: "Search hospitals"
                     ),
                     onChanged: (query) {
                       setState(() {
@@ -59,19 +56,19 @@ final  TextEditingController _searchController = TextEditingController();
                   SizedBox(
                   height: 500,
                   child: ValueListenableBuilder(
-                    valueListenable: deptListNotifier,
-                    builder: (BuildContext ctx, List<DepartmentModel> departmentList,Widget? child) {
+                    valueListenable: hospListNotifier,
+                    builder: (BuildContext ctx, List<HospModel> hospitalList,Widget? child) {
                    
                    //search part
-                   final filteredDepartments=_searchController.text.isEmpty
-                   ?departmentList
-                   :departmentList.where((dept) => 
-                   dept.dept.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
+                   final filteredHospitals=_searchController.text.isEmpty
+                   ?hospitalList
+                   :hospitalList.where((hosp) => 
+                   hosp.hosp.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
                    
                    
                     return ListView.separated(
                     itemBuilder:((context, index) {
-                      final data=departmentList[index]; 
+                      final data=hospitalList[index]; 
                         return SizedBox(
                           //height: 500,
                           child: Container(
@@ -85,7 +82,7 @@ final  TextEditingController _searchController = TextEditingController();
                               contentPadding: EdgeInsets.all(5),
                               //leading: Text("${index+1}"),
                               // title: Align(child: Text(data.dept)),     
-                              title: Align(child: Text(data.dept,style: TextStyle(fontSize: 20,fontWeight:FontWeight.w500,color: Colors.white ),)),                          
+                              title: Align(child: Text(data.hosp,style: TextStyle(fontSize: 20,fontWeight:FontWeight.w500,color: Colors.white ),)),                          
                             ),
                           ),
                         );
@@ -93,7 +90,7 @@ final  TextEditingController _searchController = TextEditingController();
                    separatorBuilder: ((context, index) {
                     return const Divider(color: Colors.white,);
                     }), 
-                  itemCount:filteredDepartments.length);
+                  itemCount:filteredHospitals.length);
                  }, ),
                 ),
                 ],
@@ -101,7 +98,6 @@ final  TextEditingController _searchController = TextEditingController();
           ),
         ),
       )
-
     );
   }
 }
