@@ -541,6 +541,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  navigator:
+    dependency: "direct main"
+    description:
+      name: navigator
+      sha256: fdbeb63fa4c0a05801f16d091c7e8e8348b1d730aa0afe46ab42c5cf1e6d1069
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   package_config:
     dependency: transitive
     description:

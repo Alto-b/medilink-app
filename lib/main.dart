@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:medilink/admin/model/deptmodel.dart';
 import 'package:medilink/admin/model/feedback_model.dart';
 import 'package:medilink/admin/model/hospmodel.dart';
+import 'package:medilink/admin/model/telemedicine_model.dart';
 import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/splash.dart';
 
@@ -21,6 +22,7 @@ void main() async{
    Hive.openBox<HospModel>('hosp_db');
    Hive.openBox<UserModel>('user_db');
    Hive.openBox<FeedBackModel>('feedback_db');
+   Hive.openBox<TelemedicineModel>('telemedicine_db');
   
   if(!Hive.isAdapterRegistered(DepartmentModelAdapter().typeId)){
       Hive.registerAdapter(DepartmentModelAdapter());
@@ -33,6 +35,9 @@ void main() async{
   }
   if(!Hive.isAdapterRegistered(FeedBackModelAdapter().typeId)){
     Hive.registerAdapter(FeedBackModelAdapter());
+  }
+  if(!Hive.isAdapterRegistered(TelemedicineModelAdapter().typeId)){
+    Hive.registerAdapter(TelemedicineModelAdapter());
   }
   runApp(const MyApp());
 }
