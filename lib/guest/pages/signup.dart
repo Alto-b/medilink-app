@@ -65,15 +65,14 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-       appBar: AppBar(
-        //title: Text("Your personal details"),
-      ),
+       
 
     body: SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(25.0),
         child: Column(
           children: [
+            SizedBox(height: 50,),
             Image.network('https://i.ibb.co/YZWjL9Y/Screenshot-2023-10-22-204311-removebg-preview.png',
                 width: 200,),
             SizedBox(height: 30,),

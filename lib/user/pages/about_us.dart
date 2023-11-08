@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AboutUsPage extends StatefulWidget {
   const AboutUsPage({super.key});
@@ -10,6 +11,24 @@ class AboutUsPage extends StatefulWidget {
 }
 
 class _AboutUsPageState extends State<AboutUsPage> {
+
+
+//  GoogleMapController? mapController;
+//   final Set<Marker> _markers = {}; // Initialize markers as an empty set
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     // Initialize _initialLocation here
+//     _markers.add(
+//       Marker(
+//         markerId: MarkerId('hospital-marker'),
+//         position: LatLng(37.7749, -122.4194),
+//         infoWindow: const InfoWindow(title: 'Hospital Name'),
+//       ),
+//     );
+//   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +131,19 @@ class _AboutUsPageState extends State<AboutUsPage> {
                     IconButton(onPressed: (){}, icon: Icon(Icons.facebook)),
                     IconButton(onPressed: (){}, icon: Icon(Icons.telegram))
                   ],
-                )
+                ),
+                // Row(
+                //   children: [
+                //       GoogleMap(initialCameraPosition: CameraPosition(
+                //         target:LatLng(37.7749, -122.4194),
+                //         zoom: 15,
+                //         ),
+                //         onMapCreated: (GoogleMapController controller){
+                //           mapController=controller;
+                //         },
+                //         markers: _markers,)
+                //   ],
+                // )
                   
                 ],
               ),

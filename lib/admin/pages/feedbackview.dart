@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:medilink/admin/db/feedback_functions.dart';
@@ -66,9 +68,19 @@ class _FeedbackViewPageState extends State<FeedbackViewPage> {
                             horizontalTitleGap: 20,
                             contentPadding: EdgeInsets.all(5),
                             leading: Text("   ${index+1}"),
-                            title: Text(data.title,style: titleStyle(),),
-                            subtitle: Text(data.content),  
-                            trailing: Text(data.date),                        
+                            title: InkWell
+                            (onTap: () { },
+                            child:Text(data.title,style: titleStyle(),)),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(data.date,style: dateTextStyle(),),
+                                SizedBox(height: 10,),
+                                Text(data.content,style: contentTextStyle(),)
+                                
+                              ],
+                            ),  
+                            //trailing: Text(data.date),                        
                           ),
                         ),
                         
@@ -85,6 +97,10 @@ class _FeedbackViewPageState extends State<FeedbackViewPage> {
       ),
     );
   }
+
+  TextStyle contentTextStyle() => TextStyle(fontWeight: FontWeight.w500);
+
+  TextStyle dateTextStyle() => TextStyle();
 
 //title text style
   TextStyle titleStyle() => const TextStyle(

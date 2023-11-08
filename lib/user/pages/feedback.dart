@@ -13,7 +13,8 @@ class FeedbackPage extends StatefulWidget {
 
 class _FeedbackPageState extends State<FeedbackPage> {
   
-  final GlobalKey _formKey=GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final TextEditingController _titleController=TextEditingController();
   final TextEditingController _contentController=TextEditingController();
 
@@ -43,14 +44,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   //title txt
                   TextFormField(
                     controller: _titleController,
-                    validator: (value) {
-                      if(value == null || value.isEmpty){
-                        return 'Cannot be empty';
-                      }
-                      return null;
-                    },
+                    validator: validateEmail,
                     decoration: InputDecoration(
-                      hintText:"Title"
+                      hintText:"Email"
                       ),
                   ),
                   SizedBox(height: 30,),
@@ -73,9 +69,10 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   SizedBox(height: 30,),
       
                   ElevatedButton(onPressed: (){
-                    submitFeedback();
-                    _titleController.clear();
-                    _contentController.clear();
+                    //submitFeedback();
+                    submit();
+                    // _titleController.clear();
+                    // _contentController.clear();
                   }, child: Text("Submit"))
                     ],
                   )
@@ -88,16 +85,60 @@ class _FeedbackPageState extends State<FeedbackPage> {
     );
   }
 
+//to validate email
+String? validateEmail(String? value) {
+  
+  final trimmedValue = value?.trim();
+
+  if (trimmedValue == null || trimmedValue.isEmpty) {
+    return 'Email is required';
+  }
+
+  final RegExp emailRegExp = RegExp(
+    r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$',
+  );
+
+  if (!emailRegExp.hasMatch(trimmedValue)) {
+    return 'Invalid email address';
+  }
+
+  return null; 
+}
+
+// //to submit feedback
+void submit() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      submitFeedback();
+      
+    }
+  }
+
+//to submit feedback
 Future<void> submitFeedback()async{
   final title=_titleController.text.trim();
   final content=_contentController.text.trim();
 
-  if(title.isEmpty || content.isEmpty){
-    return ;
+  if(title.isEmpty || content.isEmpty ){
+    return showDialog(
+    context: context, 
+    builder: (context){
+      return AlertDialog(
+       // title : const Text("error"),
+        content: const Text("Fields cannot be empty"),
+        actions: [
+          TextButton(onPressed:() => Navigator.pop(context), 
+          child: Text("Ok"))
+        ],
+      );
+    });
   }
   else{
     final feedback=FeedBackModel(title: title, content: content,date: DateTime.now().toString());
     addFeedbacks(feedback);
+     _titleController.clear();
+     _contentController.clear();
   }
 
 }

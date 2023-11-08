@@ -12,9 +12,20 @@ class _BookAppointmentState extends State<BookAppointment> {
   Widget build(BuildContext context) {
     return Scaffold(
 
+      //appbar
       appBar: AppBar(
         title: Text("book appointments"),
       ),
+
+    //body
+    body: Column(
+      children: [
+
+        Text("data")
+
+      ],
+    ),
+
     );
   }
 }

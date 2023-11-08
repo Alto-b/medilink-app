@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medilink/user/pages/about_us.dart';
 import 'package:medilink/user/pages/homepage.dart';
 import 'package:medilink/user/pages/profilepage.dart';
 
@@ -16,6 +17,7 @@ class _MainPageState extends State<MainPage> {
   List screen = const[
     HomePage(),
     ProfilePage(),
+    AboutUsPage()
   ];
 
 
@@ -34,6 +36,10 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(
               icon:Icon(Icons.person),
               label: "Profile"
+               ),
+           BottomNavigationBarItem(
+              icon:Icon(Icons.info),
+              label: "About Us"
                ),
         ],
         currentIndex: indexNum,

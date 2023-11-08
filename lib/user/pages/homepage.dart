@@ -8,6 +8,7 @@ import 'package:medilink/user/pages/feedback.dart';
 import 'package:medilink/user/pages/hospitals.dart';
 import 'package:medilink/user/pages/my_appointments.dart';
 import 'package:medilink/user/pages/specializations.dart';
+import 'package:medilink/user/pages/telemedicine.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -74,27 +75,17 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   Row(                
-                    //children: [ SizedBox(width: 15,) , Text("HOSPITAL",style: TextStyle(color: const Color.fromARGB(255, 0, 50, 92)),)],
+                    children: [ SizedBox(width: 15,) , Text("Hospital",style: headingsTextStyle(),)],
                   ),
                   SizedBox(height: 20,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                        //our hospitals
-                      //SizedBox(width: 20,),
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
-                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Colors.red,
-                        //     offset: Offset(0, 4),
-                        //     blurRadius: 10,
-                        //     spreadRadius: -3
-                        //   )
-                        // ]
-                        ) ,
+                        decoration:optionsBoxDecoration() ,
                         child: Column(children: [
                           TextButton(onPressed: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => HospitalPage(),));
@@ -111,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
-                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        decoration:optionsBoxDecoration() ,
                         child: Column(children: [
                           TextButton(onPressed: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => SpecializationPage(),));
@@ -128,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
-                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        decoration:optionsBoxDecoration() ,
                         child: Column(children: [
                           TextButton(onPressed: (){}, child: Column(
                             children: [
@@ -140,13 +131,12 @@ class _HomePageState extends State<HomePage> {
                         ]),
                       ),
                      
-                    ],
-                  ),SizedBox(height: 20,),
+                    ],                  ),SizedBox(height: 20,),
 
                   //row 2
 
                    Row(                
-                    //children: [ SizedBox(width: 15,) , Text("F&Q",style: TextStyle(color: const Color.fromARGB(255, 0, 50, 92)),)],
+                    children: [ SizedBox(width: 15,) , Text("Services",style: headingsTextStyle(),)],
                   ),
                   SizedBox(height: 20,),
                   Row(
@@ -156,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
-                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        decoration:optionsBoxDecoration() ,
                         child: Column(children: [
                           TextButton(onPressed: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => BookAppointment(),));
@@ -172,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
-                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        decoration:optionsBoxDecoration() ,
                         //color: Colors.red,
                         child: Column(children: [
                           // Icon(Icons.schedule),
@@ -190,92 +180,57 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
-                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        decoration:optionsBoxDecoration() ,
                         //color: Colors.red,
                         child: Column(children: [
                           // Icon(Icons.schedule),
                           TextButton(onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackPage(),)); 
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => TelemedicinePage(),)); 
                              },
                          child: Column(
                             children: [
-                              Icon(Icons.feedback_outlined,size: 50,),
-                              Text("Feedback",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
-                              //Text(" ",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                              Icon(Icons.medication_outlined,size: 50,),
+                              Text("Telemedicine",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                              Text(" Services",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
                             ],
                           ))
                         ]),
                       ),
-                      //our hospitals
-                      //SizedBox(width: 20,),
-                      // Container(
-                      //   alignment: Alignment.center,
-                      //   height: 100,width: 100,
-                      //   decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
-                      //   //color: Colors.red,
-                      //   child: Column(children: [
-                      //     // Icon(Icons.schedule),
-                      //     TextButton(onPressed: (){}, child: Column(
-                      //       children: [
-                      //         Icon(Icons.business,size: 50,),
-                      //         Text("Our ",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
-                      //         Text(" hospitals",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
-                      //       ],
-                      //     ))
-                      //   ]),
-                      // ),
                     ],
                   ),SizedBox(height: 20,),
 
                   //row 3
 
                    Row(                
-                    //children: [ SizedBox(width: 15,) , Text("F&Q",style: TextStyle(color: const Color.fromARGB(255, 0, 50, 92)),)],
+                    children: [ SizedBox(width: 15,) , Text("Reach to us",style: headingsTextStyle(),)],
                   ),
                   SizedBox(height: 20,),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      //my appointment
-                      // Container(
-                      //   alignment: Alignment.center,
-                      //   height: 100,width: 100,
-                      //   decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
-                      //   //color: Colors.red,
-                      //   child: Column(children: [
-                      //     // Icon(Icons.schedule),
-                      //     TextButton(onPressed: (){
-                      //       Navigator.push(context, MaterialPageRoute(builder: (context) => MyAppointments(),));
-                      //     }, child: Column(
-                      //       children: [
-                      //         Icon(Icons.schedule_rounded,size: 50,),
-                      //         Text("My Appointments",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
-                      //       ],
-                      //     ))
-                      //   ]),
-                      // ),
-                      //feedback
-                      SizedBox(width: 20,),
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
-                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        decoration:optionsBoxDecoration() ,
                         //color: Colors.red,
                         child: Column(children: [
                           // Icon(Icons.schedule),
-                          TextButton(onPressed: (){}, child: Column(
+                          TextButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackPage(),));
+                          }, child: Column(
                             children: [
                               Icon(Icons.feedback_outlined,size: 50,),
+                              Text("Provide",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
                               Text("Feedback",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
                             ],
                           ))
                         ]),
-                      ),SizedBox(width: 15,),
+                      ),
                       //our doctors
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
-                        decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        decoration:optionsBoxDecoration() ,
                         //color: Colors.red,
                         child: Column(children: [
                           // Icon(Icons.schedule),
@@ -289,24 +244,24 @@ class _HomePageState extends State<HomePage> {
                           ))
                         ]),
                       ),
-                      //our hospitals
-                      //SizedBox(width: 20,),
-                      // Container(
-                      //   alignment: Alignment.center,
-                      //   height: 100,width: 100,
-                      //   decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
-                      //   //color: Colors.red,
-                      //   child: Column(children: [
-                      //     // Icon(Icons.schedule),
-                      //     TextButton(onPressed: (){}, child: Column(
-                      //       children: [
-                      //         Icon(Icons.business,size: 50,),
-                      //         Text("Our ",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
-                      //         Text(" hospitals",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
-                      //       ],
-                      //     ))
-                      //   ]),
-                      // ),
+                    // blank space
+                      //SizedBox(width: 10,),
+                      Container(
+                        alignment: Alignment.center,
+                        height: 100,width: 100,
+                        //decoration:BoxDecoration(border: Border.all(color: Colors.blueGrey),borderRadius: BorderRadius.circular(20)) ,
+                        //color: Colors.red,
+                        child: Column(children: [
+                          // Icon(Icons.schedule),
+                          // TextButton(onPressed: (){}, child: Column(
+                          //   children: [
+                          //    // Icon(Icons.business,size: 50,),
+                          //     Text(" ",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                          //     Text("",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),
+                          //   ],
+                          // ))
+                        ]),
+                      ),
                     ],
                   ),
                 ],
@@ -332,6 +287,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+ 
+
     //launch dialer
   void _launchDialer(String phoneNumber) async{
            Uri phoneno = Uri.parse('tel:108000');
@@ -341,5 +298,25 @@ class _HomePageState extends State<HomePage> {
           SnackBar(content: Text("couldn't launch dialer"));
       }
     } 
+
+//text styles
+ TextStyle headingsTextStyle() => TextStyle(color:Colors.deepPurple,fontWeight: FontWeight.w700,fontSize: 18);
+
+
+//options style
+
+  BoxDecoration optionsBoxDecoration() => BoxDecoration(
+    color: Colors.white,
+    // border: Border.all(
+    //   //color: Colors.blueGrey,width: 0.5
+    //   ),
+      borderRadius: BorderRadius.circular(10),
+      boxShadow:[
+        BoxShadow(
+          spreadRadius: 1,
+           blurRadius: 3,
+           //offset: Offset(-3, -1),
+          color:Colors.grey.withOpacity(.5),
+          )] );
 
 }
