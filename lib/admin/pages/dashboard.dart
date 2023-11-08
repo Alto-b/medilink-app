@@ -6,7 +6,9 @@ import 'package:medilink/admin/pages/department.dart';
 import 'package:medilink/admin/pages/doctor.dart';
 import 'package:medilink/admin/pages/feedbackview.dart';
 import 'package:medilink/admin/pages/hospital.dart';
+import 'package:medilink/admin/pages/telemedicine_view.dart';
 import 'package:medilink/guest/pages/signup.dart';
+import 'package:medilink/user/pages/telemedicine.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
@@ -24,6 +26,7 @@ class _DashBoardState extends State<DashBoard> {
   'Hospitals',
   'Doctors',
   'Doctors list',
+  'Telemedicine',
   'Feedback',
   
   ];
@@ -35,6 +38,7 @@ class _DashBoardState extends State<DashBoard> {
       (context) => HospitalPage(),
       (context) => AddDoctor(),
       (context) => DepartmentPage(),
+      (context) => TelemedicineViewPage(),
       (context) => FeedbackViewPage(),
     ];
 
@@ -70,6 +74,11 @@ class _DashBoardState extends State<DashBoard> {
   color:Colors.black,
   ),
   Icon(
+    Icons.medication_rounded,
+  size:50,
+  color:Colors.black,
+  ),
+  Icon(
     Icons.feedback,
   size:50,
   color:Colors.black,
@@ -82,6 +91,7 @@ class _DashBoardState extends State<DashBoard> {
   Color.fromARGB(122, 9, 215, 67),
   Color.fromARGB(122, 9, 215, 67),
   Color.fromARGB(123, 72, 8, 176),
+  Color.fromARGB(106, 17, 115, 195),
   Color.fromARGB(106, 17, 115, 195),
   Color.fromARGB(100, 199, 113, 14),
 ];

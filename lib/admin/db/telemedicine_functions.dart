@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:medilink/admin/model/telemedicine_model.dart';
 
-ValueNotifier<List<TelemedicineModel>> deptListNotifier=ValueNotifier([]);
+ValueNotifier<List<TelemedicineModel>> telemedicineListNotifier=ValueNotifier([]);
 
 //to add telemedicine enquiry
 Future<void> addTelemedicine(TelemedicineModel value) async{
@@ -18,9 +18,9 @@ Future<void> addTelemedicine(TelemedicineModel value) async{
 //to read telemedicine
 Future<void> getTelemedicine() async{
   final teleDB = await Hive.openBox<TelemedicineModel>('telemedicine_db');
-  deptListNotifier.value.clear();
-  deptListNotifier.value.addAll(teleDB.values);
-  deptListNotifier.notifyListeners();
+  telemedicineListNotifier.value.clear();
+  telemedicineListNotifier.value.addAll(teleDB.values);
+  telemedicineListNotifier.notifyListeners();
 }
 
 //to remove telemedicine enquiry
