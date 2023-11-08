@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:medilink/user/pages/about_us.dart';
 import 'package:medilink/user/pages/book_appointment.dart';
+import 'package:medilink/user/pages/feedback.dart';
 import 'package:medilink/user/pages/hospitals.dart';
 import 'package:medilink/user/pages/my_appointments.dart';
 import 'package:medilink/user/pages/specializations.dart';
@@ -194,7 +195,9 @@ class _HomePageState extends State<HomePage> {
                         child: Column(children: [
                           // Icon(Icons.schedule),
                           TextButton(onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUsPage(),));                          }, child: Column(
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackPage(),)); 
+                             },
+                         child: Column(
                             children: [
                               Icon(Icons.feedback_outlined,size: 50,),
                               Text("Feedback",style: TextStyle(fontSize: 11),textAlign: TextAlign.center),

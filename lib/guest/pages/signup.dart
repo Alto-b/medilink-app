@@ -373,6 +373,7 @@ String? validatecpassword(String? value){
         //print('$_dept');
       final _user=UserModel(fullname: fullName, dob: dateOfBirth, gender: gender, email: email, password: pass);
       addUser(_user);
+      Navigator.pushReplacement(context,MaterialPageRoute(builder:(context) => LoginPage(),));
        
       }
       else{

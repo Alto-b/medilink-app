@@ -9,7 +9,7 @@ class DepartmentModel extends HiveObject{
    int? id;
 
   @HiveField(1)
-  final String dept;
+   String dept;
 
   DepartmentModel({required this.dept, this.id});
 }

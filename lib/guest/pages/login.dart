@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:medilink/guest/db/user_functions.dart';
 import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/signup.dart';
+import 'package:medilink/main.dart';
 import 'package:medilink/user/mainpage.dart';
 import 'package:medilink/user/pages/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,9 +19,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-    final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,7 +149,7 @@ for(var i=0;i<userDB.length;i++){
 
 if(user != null){
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setBool('isloggedIn', true);
+  await prefs.setBool(SAVE_KEY_NAME, true);
 
   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage(),));
 
@@ -156,7 +159,7 @@ else{
     context: context, 
     builder: (context){
       return AlertDialog(
-        title : const Text("error"),
+       // title : const Text("error"),
         content: const Text("invalid email or password"),
         actions: [
           TextButton(onPressed:() => Navigator.pop(context), 

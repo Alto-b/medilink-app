@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:medilink/guest/pages/login.dart';
 import 'package:medilink/guest/pages/signup.dart';
 import 'package:medilink/main.dart';
+import 'package:medilink/user/mainpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatefulWidget {
@@ -47,7 +48,7 @@ class _SplashState extends State<Splash> {
 
   Future<void> gotoLogin() async{
     await Future.delayed(Duration(seconds: 5));
-    Navigator.of(context).pushReplacement( MaterialPageRoute(builder:(ctx)=>SignUpPage()));
+    Navigator.of(context).pushReplacement( MaterialPageRoute(builder:(ctx)=>LoginPage()));
   }
 
   Future<void> checkUserLoggedIn() async{
@@ -57,7 +58,7 @@ class _SplashState extends State<Splash> {
     gotoLogin();
   }
   else{
-    //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=>HomePage()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=>MainPage()));
   }
   }
 }

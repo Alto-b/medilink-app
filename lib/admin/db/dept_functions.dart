@@ -45,3 +45,24 @@ Future<List<DepartmentModel>> searchDepartments(String keyword) async {
 
   return filteredDepartments;
 }
+
+//to edit departments
+// Future<void> editDepartment(int id, String updatedDepartmentName) async {
+//   final deptBox = await Hive.openBox<DepartmentModel>('dept_db');
+//   final existingDepartment = deptBox.values.firstWhere((dept) => dept.id == id, orElse: (){
+//     print("null") ; 
+//   });
+
+//   if (existingDepartment == null) {
+//     print("no dept");
+//   }
+//   else{
+//     // Update the department's name
+//     existingDepartment.dept = updatedDepartmentName;
+
+//     // Save the updated department back to Hive
+//     await deptBox.put(id, existingDepartment);
+ 
+
+//   }
+// }

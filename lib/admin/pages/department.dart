@@ -109,7 +109,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
                               //edit
                               SlidableAction(onPressed: (context) {
                                 //DepartmentModel _deptname=_departmentController.text as DepartmentModel;
-                                //editDept(data.id!,deptname );
+                                // editDept(data.id!,deptname );
+                               // editDepartment(data.id!, _departmentController.text);
                               },
                               icon:Icons.edit,
                               backgroundColor: Color.fromARGB(255, 10, 112, 196),
