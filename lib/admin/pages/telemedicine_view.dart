@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:medilink/admin/db/telemedicine_functions.dart';
 import 'package:medilink/admin/model/telemedicine_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TelemedicineViewPage extends StatefulWidget {
   const TelemedicineViewPage({super.key});
@@ -11,6 +12,8 @@ class TelemedicineViewPage extends StatefulWidget {
 }
 
 class _TelemedicineViewPageState extends State<TelemedicineViewPage> {
+  
+
   @override
   Widget build(BuildContext context) {
 
@@ -56,7 +59,7 @@ class _TelemedicineViewPageState extends State<TelemedicineViewPage> {
                              children: [
                               //delete
                               SlidableAction(onPressed: (context) {
-                                    //deleteFeedbacks(data.id!);
+                                    _launchDialer(data.mobile);
                                  },
          
                               icon:Icons.call,foregroundColor: Colors.white,
@@ -88,12 +91,12 @@ class _TelemedicineViewPageState extends State<TelemedicineViewPage> {
                                 Text('Medicine: ${data.medicine}'),
                                 Text('Symptoms: ${data.symptoms}'),
                                 Text('Address: ${data.address}'),
-                                Text('Symptoms: ${data.symptoms}'),
-                                
-                                
+                                //Text('Mobile: ${data.mobile}'), 
                               ],
                             ),  
-                            //trailing:IconButton(onPressed: (){ }, icon: Icon(Icons.call))                  
+                            // trailing:IconButton(onPressed: (){
+                            //   // _launchDialer(data.mobile);
+                            //  }, icon: Icon(Icons.call))                  
                           ),
                         ),
                         
@@ -110,4 +113,15 @@ class _TelemedicineViewPageState extends State<TelemedicineViewPage> {
       ),
     );
   }
+
+    //launch dialer
+ void _launchDialer(String phoneNumber) async{
+
+           Uri phoneno = Uri.parse('tel:+91$phoneNumber');
+       if (await launchUrl(phoneno)) {
+              //dialer opened
+          }else{
+          SnackBar(content: Text("couldn't launch dialer"));
+      }
+    } 
 }

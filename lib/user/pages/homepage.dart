@@ -291,7 +291,8 @@ class _HomePageState extends State<HomePage> {
 
     //launch dialer
   void _launchDialer(String phoneNumber) async{
-           Uri phoneno = Uri.parse('tel:108000');
+
+           Uri phoneno = Uri.parse('tel:$phoneNumber');
        if (await launchUrl(phoneno)) {
               //dialer opened
           }else{
