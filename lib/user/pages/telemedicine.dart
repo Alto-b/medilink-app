@@ -183,7 +183,6 @@ String? validateAddress(String? value) {
 }
 
 //to validate cannot be empty
-//to validate address
 String? validateEmpty(String? value) {
   
   final trimmedValue = value?.trim();
