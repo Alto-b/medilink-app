@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
+// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers, use_build_context_synchronously
 
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:medilink/admin/pages/dashboard.dart';
 import 'package:medilink/guest/db/user_functions.dart';
 import 'package:medilink/guest/model/usermodel.dart';
@@ -39,6 +40,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _emailController=TextEditingController();
   final TextEditingController _passwordController=TextEditingController();
   final TextEditingController _cpasswordController=TextEditingController();
+
+  bool showError=false;
 
 
   //a Boolean function to verify if the Data provided is true
@@ -86,8 +89,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   validator: validateFullName,
                   controller: _nameController,
                   decoration: InputDecoration(
-                    hintText: "Full Name"
-                  ),
+                    hintText: "Full Name",
+                    ),
+                  
                 ),
     
                 SizedBox(height: 20,),
@@ -187,10 +191,16 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(height: 20,),
 
                ElevatedButton(onPressed: (){
-                   addUserbutton();
-                   setState(() {
-                     
-                   });
+                   //addUserbutton();
+                   userCheck(_emailController.text);
+                   _nameController.clear();
+                   _dobController.clear();
+                   _emailController.clear();
+                   _passwordController.clear();
+                   _cpasswordController.clear();
+                   
+
+                   
                 //Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
 
                 },
@@ -344,19 +354,34 @@ String? validatecpassword(String? value){
   return null;
 }
 
-// //to sign up user
+//to check if new user
+void userCheck(String email)async{
+  await Hive.openBox<UserModel>('user_db');
+  final userDB=Hive.box<UserModel>('user_db');
+  final userExists=userDB.values.any((user) => user.email == email);
 
-// Future<void> userAddButton()async{
+  if(userExists){
+    showDialog(
+      context: context, 
+      builder: (context){
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text("User already exists"),
+          actions: [
+            TextButton(onPressed: (){
+              Navigator.pop(context);
+            }, child: Text("Ok"))
+          ],
+        );
+      });
+  }
+  else{
+    addUserbutton();
+  }
 
-//   final _name=_nameController.text.trim();
-//   final _dob=_dobController.text.trim();
-//   final _gender=selectedGender;
-//   final _email=_emailController.text.trim();
-//   final _password=_passwordController.text.trim();
+}
 
-//   final _user=UserModel(fullname: _name, dob: _dob, gender: _gender, email: _email, password: _password);
-//   addUSer(_user);
-// }
+
 
 //to add user
     Future<void> addUserbutton() async{

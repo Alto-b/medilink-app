@@ -3,10 +3,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:medilink/guest/pages/login.dart';
-import 'package:medilink/guest/pages/signup.dart';
 import 'package:medilink/main.dart';
 import 'package:medilink/user/mainpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:lottie/lottie.dart';
+
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -31,11 +32,17 @@ class _SplashState extends State<Splash> {
       body:Center(
          // animated start
 
-           child: Image.network(
-            'https://mir-s3-cdn-cf.behance.net/project_modules/hd/7b400598172263.5ed651c0b9b9f.gif',
-            width: 500, 
-            height: 500, 
-          ),
+           child:
+          //   Image.network(
+          //   'https://mir-s3-cdn-cf.behance.net/project_modules/hd/7b400598172263.5ed651c0b9b9f.gif',
+          //   width: 500, 
+          //   height: 500, 
+          // ),
+
+          //Lottie.network('https://lottie.host/c9500319-ddfb-4e34-ad7a-c273566afc48/f0672XXdBI.json')
+          Lottie.network('https://lottie.host/bd25ad80-6663-4067-988c-d2573041b658/AZ3HTwnoJp.json')
+
+         //Lottie.asset('lib/assets/loading.json')
 
 
         // animated end
