@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:medilink/admin/pages/dashboard.dart';
 import 'package:medilink/guest/db/user_functions.dart';
 import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/signup.dart';
@@ -126,8 +127,12 @@ String? validatepassword(String? value){
 void submit() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-
-      login(_emailController.text, _passwordController.text, context);
+      if(_emailController.text=="admin@gmail.com" && _passwordController.text=="admin"){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashBoard(),));
+      }
+      else{
+        login(_emailController.text, _passwordController.text, context);
+        }
       
     }
   }
