@@ -193,11 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
                ElevatedButton(onPressed: (){
                    //addUserbutton();
                    userCheck(_emailController.text);
-                   _nameController.clear();
-                   _dobController.clear();
-                   _emailController.clear();
-                   _passwordController.clear();
-                   _cpasswordController.clear();
+                 
                    
 
                    
@@ -402,6 +398,11 @@ void userCheck(String email)async{
       }
       else{
         showSnackBar(context, 'User registration failed!');
+          _nameController.clear();
+                   _dobController.clear();
+                   _emailController.clear();
+                   _passwordController.clear();
+                   _cpasswordController.clear();
       }
     }
 

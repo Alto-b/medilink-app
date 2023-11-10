@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -132,6 +132,7 @@ void submit() {
       }
       else{
         login(_emailController.text, _passwordController.text, context);
+        
         }
       
     }
@@ -155,7 +156,7 @@ for(var i=0;i<userDB.length;i++){
 if(user != null){
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setBool(SAVE_KEY_NAME, true);
-
+  await saveUserEmail(email);
   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage(),));
 
 }
@@ -173,9 +174,13 @@ else{
       );
     });
 }
-
-
-
 }
+
+//to set current user
+Future<void> saveUserEmail(String email) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('currentUser', email);
+  }
+
 
 }

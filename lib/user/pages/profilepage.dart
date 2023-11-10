@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:medilink/guest/db/user_functions.dart';
 import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/login.dart';
 import 'package:medilink/main.dart';
@@ -16,8 +17,36 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
 
+    String userEmail = ''; // State variable to store the user's email
+  UserModel? currentUser;
+
+   @override
+  void initState() {
+    super.initState();
+    // Call the getUser function when the page is initialized
+    getUser();
+  }
+
+  Future<void> getUser() async {
+    // Retrieve currentUser email from shared preferences
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    userEmail = prefs.getString('currentUser') ?? '';
+
+    // Find the user in Hive using the email
+    final userBox = await Hive.openBox<UserModel>('user_db');
+    currentUser = userBox.values.firstWhere(
+      (user) => user.email == userEmail,
+      //orElse: () => null,
+    );
+
+    setState(() {}); // Update the UI with the fetched data
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
 
       appBar: AppBar(
@@ -28,6 +57,30 @@ class _ProfilePageState extends State<ProfilePage> {
           }, icon: Icon(Icons.logout))
         ],
       ),
+
+      //body
+      // body: Column(
+      //   children: [
+      //     Text("email: ")
+      //   ],
+      // ),
+
+    body: currentUser!=null ?
+    Column(
+      children: [
+        Text("email :${currentUser!.email}"),
+        Text("name :${currentUser!.fullname}"),
+        Text("dob :${currentUser!.dob}")
+
+      ],
+    )
+    :Center(
+      child: Column(
+        children: [
+          Text("user not logged in")
+        ],
+      ),
+    )
 
     );
   }
