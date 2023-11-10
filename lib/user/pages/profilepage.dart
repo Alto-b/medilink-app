@@ -1,12 +1,15 @@
-// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
+// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers, prefer_const_literals_to_create_immutables
+
+
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:medilink/guest/db/user_functions.dart';
 import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/login.dart';
 import 'package:medilink/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -17,35 +20,52 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
 
-    String userEmail = ''; // State variable to store the user's email
+    String userEmail = ''; 
   UserModel? currentUser;
+  
+   int age=0;
+
+   
 
    @override
   void initState() {
     super.initState();
     // Call the getUser function when the page is initialized
-    getUser();
+    getUser();    
   }
 
   Future<void> getUser() async {
     // Retrieve currentUser email from shared preferences
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+   
+   //if(currentUser != null)
     userEmail = prefs.getString('currentUser') ?? '';
-
-    // Find the user in Hive using the email
+    // check the user in Hive using the email
     final userBox = await Hive.openBox<UserModel>('user_db');
     currentUser = userBox.values.firstWhere(
       (user) => user.email == userEmail,
       //orElse: () => null,
     );
-
-    setState(() {}); // Update the UI with the fetched data
+    setState(() {}); 
   }
+
 
 
   @override
   Widget build(BuildContext context) {
 
+//calculate age
+String dobString = currentUser?.dob??''; // Assuming currentUser.dob is a string
+
+// Parse the string into a DateTime object
+DateTime dob = DateTime.parse(dobString);
+
+DateTime currentDate = DateTime.now();
+Duration difference = currentDate.difference(dob);
+age = (difference.inDays / 365).floor();
+
+//print('User\'s age is $age years');}
+//age calculated
 
     return Scaffold(
 
@@ -66,13 +86,81 @@ class _ProfilePageState extends State<ProfilePage> {
       // ),
 
     body: currentUser!=null ?
-    Column(
-      children: [
-        Text("email :${currentUser!.email}"),
-        Text("name :${currentUser!.fullname}"),
-        Text("dob :${currentUser!.dob}")
-
-      ],
+    Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Align(
+        child: Column(
+          children: [
+            // Text("email :${currentUser!.email}"),
+            // Text("name :${currentUser!.fullname}"),
+            // Text("dob :${currentUser!.dob}")
+          SizedBox(height: 30,),
+          Container(
+            decoration: BoxDecoration(
+              //color: Colors.grey,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(width: 2)
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10,),
+                  //name
+                  Text(
+                    "Name : ${currentUser!.fullname}",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    
+                    ),
+                  ),SizedBox(height: 10,),
+                  //email
+                  Text(
+                    "Email : ${currentUser!.email}",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    
+                    ),
+                  ),SizedBox(height: 10,),
+                  //Gender
+                  Text(
+                    "Gender : ${currentUser!.gender}",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    
+                    ),
+                  ),SizedBox(height: 10,),
+                  //Date of birth
+                  Text(
+                    "Date  Of Birth : ${currentUser!.dob}",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    
+                    ),
+                  ),SizedBox(height: 10,),
+                  //Date of birth
+                  Text(
+                    "Date Of Birth: $age Years",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    
+                    ),
+                  ),SizedBox(height: 10,),
+                ],
+              ),
+            ),
+          )
+           
+          
+          ],
+        ),
+      ),
     )
     :Center(
       child: Column(
