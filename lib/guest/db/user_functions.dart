@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 ValueNotifier<List<UserModel>> userListNotifier=ValueNotifier([]);
 
-//to add departments
+//to add users
 Future<void> addUser(UserModel value) async{
   final userDB = await Hive.openBox<UserModel>('user_db');
   final _id=await userDB.add(value);

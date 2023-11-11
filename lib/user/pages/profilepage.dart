@@ -46,23 +46,31 @@ class _ProfilePageState extends State<ProfilePage> {
       (user) => user.email == userEmail,
       //orElse: () => null,
     );
+    calculateAge();
     setState(() {}); 
   }
-
+void calculateAge() {
+    if (currentUser != null) {
+      String dobString = currentUser!.dob ?? '';
+      DateTime dob = DateTime.parse(dobString);
+      DateTime currentDate = DateTime.now();
+      Duration difference = currentDate.difference(dob);
+      age = (difference.inDays / 365).floor();
+    }
+  }
 
 
   @override
   Widget build(BuildContext context) {
 
 //calculate age
-String dobString = currentUser?.dob??''; // Assuming currentUser.dob is a string
+// String dobString = currentUser?.dob??''; // Assuming currentUser.dob is a string
 
-// Parse the string into a DateTime object
-DateTime dob = DateTime.parse(dobString);
+// DateTime dob = DateTime.parse(dobString);
 
-DateTime currentDate = DateTime.now();
-Duration difference = currentDate.difference(dob);
-age = (difference.inDays / 365).floor();
+// DateTime currentDate = DateTime.now();
+// Duration difference = currentDate.difference(dob);
+// age = (difference.inDays / 365).floor();
 
 //print('User\'s age is $age years');}
 //age calculated
@@ -145,7 +153,7 @@ age = (difference.inDays / 365).floor();
                   ),SizedBox(height: 10,),
                   //Date of birth
                   Text(
-                    "Date Of Birth: $age Years",
+                    "Age: $age Years",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,

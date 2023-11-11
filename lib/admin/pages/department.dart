@@ -91,13 +91,15 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 ],
               )),
 
+
+              //listener
+
               SizedBox(
                   height: 500,
                   child: ValueListenableBuilder(
                     valueListenable: deptListNotifier,
                     builder: (BuildContext ctx, List<DepartmentModel> departmentList,Widget? child) {
-                      
-                    
+
                     return ListView.separated(
                     itemBuilder:((context, index) {
                       final data=departmentList[index];
