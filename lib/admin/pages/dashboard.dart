@@ -5,8 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medilink/admin/pages/appointment_view.dart';
 import 'package:medilink/admin/pages/department.dart';
 import 'package:medilink/admin/pages/doctor.dart';
+import 'package:medilink/admin/pages/doctor_list.dart';
 import 'package:medilink/admin/pages/feedbackview.dart';
 import 'package:medilink/admin/pages/hospital.dart';
+import 'package:medilink/admin/pages/statistics.dart';
 import 'package:medilink/admin/pages/telemedicine_view.dart';
 import 'package:medilink/guest/pages/signup.dart';
 import 'package:medilink/user/pages/telemedicine.dart';
@@ -34,11 +36,11 @@ class _DashBoardState extends State<DashBoard> {
 
   final List<WidgetBuilder> pageBuilders = [
       (context) => AppointmentViewPage(),
-      (context) => DepartmentPage(),
+      (context) => StatisticsPage(),
       (context) => DepartmentPage(),
       (context) => HospitalPage(),
       (context) => AddDoctor(),
-      (context) => DepartmentPage(),
+      (context) => DoctorListPage(),
       (context) => TelemedicineViewPage(),
       (context) => FeedbackViewPage(),
     ];

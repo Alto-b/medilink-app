@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:medilink/admin/model/appointment_model.dart';
 import 'package:medilink/admin/model/deptmodel.dart';
+import 'package:medilink/admin/model/doctor_model.dart';
 import 'package:medilink/admin/model/feedback_model.dart';
 import 'package:medilink/admin/model/hospmodel.dart';
 import 'package:medilink/admin/model/telemedicine_model.dart';
@@ -25,6 +26,7 @@ void main() async{
    Hive.openBox<FeedBackModel>('feedback_db');
    Hive.openBox<TelemedicineModel>('telemedicine_db');
    Hive.openBox<AppointmentModel>('appointment_db');
+   Hive.openBox<DoctorModelAdapter>('doctor_db');
   
   if(!Hive.isAdapterRegistered(DepartmentModelAdapter().typeId)){
       Hive.registerAdapter(DepartmentModelAdapter());
@@ -43,6 +45,9 @@ void main() async{
   }
   if(!Hive.isAdapterRegistered(AppointmentModelAdapter().typeId)){
     Hive.registerAdapter(AppointmentModelAdapter());
+  }
+  if(!Hive.isAdapterRegistered(DoctorModelAdapter().typeId)){
+    Hive.registerAdapter(DoctorModelAdapter());
   }
  
   runApp(const MyApp());
@@ -71,7 +76,15 @@ class MyApp extends StatelessWidget {
                                           ),
         useMaterial3: true,
       ),
+
+      //theme: DarkThemeData(),
       home: Splash()
+    );
+  }
+
+  ThemeData DarkThemeData() {
+    return ThemeData(
+      brightness: Brightness.dark
     );
   }
 }
