@@ -16,6 +16,12 @@ Future<void> addUser(UserModel value) async{
   userListNotifier.notifyListeners();
 }
 
+//to delete users
+Future<void> deleteUser(int id) async{
+  final deptDB = await Hive.openBox<UserModel>('user_db');
+  await deptDB.delete(id);
+}
+
 //to get user info
 // Future<void> getUser()async{
 //   final userDB = await Hive.openBox<UserModel>('user_db');

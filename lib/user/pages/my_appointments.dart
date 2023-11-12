@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 
 class MyAppointments extends StatefulWidget {
   const MyAppointments({super.key});
@@ -13,7 +14,7 @@ class _MyAppointmentsState extends State<MyAppointments> {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("my appointments"),
+        title: Text("MY APPOINTMENTS",style: appBarTitleStyle(),),
       ),
     );
   }

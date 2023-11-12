@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:medilink/admin/db/feedback_functions.dart';
 import 'package:medilink/admin/model/feedback_model.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 
 class FeedbackPage extends StatefulWidget {
   const FeedbackPage({super.key});
@@ -23,7 +24,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar: AppBar(title: Text("feedback")),
+      appBar: AppBar(title: Text("FEEDBACK",style: appBarTitleStyle(),)),
 
 
       //body

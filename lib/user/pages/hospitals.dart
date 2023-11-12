@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/admin/db/hosp_functions.dart';
 import 'package:medilink/admin/model/hospmodel.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 
 class HospitalPage extends StatefulWidget {
   const HospitalPage({super.key});
@@ -21,7 +23,7 @@ final  TextEditingController _searchController = TextEditingController();
 
       //appbar
       appBar: AppBar(
-        title: Text("Our hospitals"),
+        title: Text("OUR HOSPITALS",style: appBarTitleStyle()),
       ) ,
 
       body:SingleChildScrollView(
@@ -100,4 +102,6 @@ final  TextEditingController _searchController = TextEditingController();
       )
     );
   }
+
+
 }

@@ -59,13 +59,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
+          centerTitle: true,
           iconTheme: IconThemeData(
             //color: Colors.white,
           )
         ),
         //colorScheme: ColorScheme.fromSeed(seedColor: Color(0x001abc8d)),
-        // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey,cardColor: Colors.red),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightGreen,cardColor: const Color.fromARGB(255, 255, 255, 255)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,
+                                              error: Colors.red[400],
+                                          ),
         useMaterial3: true,
       ),
       home: Splash()

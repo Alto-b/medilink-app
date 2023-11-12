@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:medilink/admin/db/dept_functions.dart';
 import 'package:medilink/admin/model/deptmodel.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 
 class SpecializationPage extends StatefulWidget {
   const SpecializationPage({super.key});
@@ -23,7 +24,7 @@ final  TextEditingController _searchController = TextEditingController();
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("Our Specializations"),
+        title: Text("OUR SPECIALIZATIONS",style: appBarTitleStyle(),),
       ),
 
 

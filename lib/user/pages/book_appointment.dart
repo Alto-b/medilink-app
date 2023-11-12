@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medilink/admin/db/appointment_functions.dart';
 import 'package:medilink/admin/model/appointment_model.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 import 'package:medilink/user/mainpage.dart';
 
 class BookAppointment extends StatefulWidget {
@@ -35,7 +36,7 @@ class _BookAppointmentState extends State<BookAppointment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Book Appointments"),
+        title: Text("BOOK APPOINTMENTS",style: appBarTitleStyle(),),
       ),
       body: SingleChildScrollView(
         child: Column(

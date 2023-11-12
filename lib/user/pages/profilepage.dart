@@ -7,6 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/login.dart';
 import 'package:medilink/main.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -78,12 +79,7 @@ void calculateAge() {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("profile page"),
-        actions: [
-          IconButton(onPressed: (){
-            logOut(context);
-          }, icon: Icon(Icons.logout))
-        ],
+        title: Text("PROFILE PAGE",style: appBarTitleStyle(),),
       ),
 
       //body
@@ -94,120 +90,82 @@ void calculateAge() {
       // ),
 
     body: currentUser!=null ?
-    Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Align(
-        child: Column(
-          children: [
-            // Text("email :${currentUser!.email}"),
-            // Text("name :${currentUser!.fullname}"),
-            // Text("dob :${currentUser!.dob}")
-          SizedBox(height: 30,),
-          Container(
-            decoration: BoxDecoration(
-              //color: Colors.grey,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(width: 2)
-            ),
-            child: Padding(
+    SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Align(
+          child: Column(
+            children: [
+            SizedBox(height: 20,),
+            Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10,),
-                  //name
-                  Text(
-                    "Name : ${currentUser!.fullname}",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    
-                    ),
-                  ),SizedBox(height: 10,),
-                  //email
-                  Text(
-                    "Email : ${currentUser!.email}",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    
-                    ),
-                  ),SizedBox(height: 10,),
-                  //Gender
-                  Text(
-                    "Gender : ${currentUser!.gender}",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    
-                    ),
-                  ),SizedBox(height: 10,),
-                  //Date of birth
-                  Text(
-                    "Date  Of Birth : ${currentUser!.dob}",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    
-                    ),
-                  ),SizedBox(height: 10,),
-                  //Date of birth
-                  Text(
-                    "Age: $age Years",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    
-                    ),
-                  ),SizedBox(height: 10,),
-                ],
+              child: Container(
+                decoration: optionsBoxDecoration(),
+                height: 400,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        leading: Icon(Icons.person,color: Colors.deepPurple,),
+                        title: Text("${currentUser!.fullname}",style: ProfileTextStyle(),),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.email,color: Colors.red[400],),
+                        title: Text("${currentUser!.email}",style: ProfileTextStyle(),),
+                      ),
+                      ListTile(
+                        leading: getGenderIcon(currentUser!.gender),
+                        title: Text("${currentUser!.gender}",style: ProfileTextStyle(),),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.calendar_month,color: Colors.green,),
+                        title: Text("${currentUser!.dob}",style: ProfileTextStyle(),),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.date_range_outlined,color: Colors.amber,),
+                        title: Text("$age Years",style: ProfileTextStyle(),),
+                      ),
+                       Spacer(),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(onPressed: (){}, child: Text("Edit profile")),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              
               ),
-            ),
-          )
-           
-          
-          ],
+            )
+             
+            
+            ],
+          ),
         ),
       ),
     )
     :Center(
-      child: Column(
-        children: [
-          Text("user not logged in")
-        ],
+      child: Center(
+        child: Column(
+          children: [
+            SizedBox(height: 200,),
+            Text("USER NOT LOGGED IN"),
+            TextButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
+            }, child: Text("PROCEED TO LOGIN"))
+          ],
+        ),
       ),
     )
 
     );
   }
 
-//log out
-void logOut(BuildContext context){
-      showDialog(context: context, builder: (context){
-        return AlertDialog(
-          title:Text("Logout"),
-          content: Text("Do you want to leave ?"),
-          actions: [
-            ElevatedButton(onPressed: (){
-              signout(context);
-            }, child: Text("Yes")),
-            ElevatedButton(onPressed: (){
-              Navigator.pop(context);
-            }, child: Text("No")),
-          ],
-        );
-      });
-    }
-//signout
-  signout(BuildContext ctx) async{
-
-    final _sharedPrefs= await SharedPreferences.getInstance();
-  await _sharedPrefs.clear();
-
-    // ignore: use_build_context_synchronously
-    Navigator.of(ctx).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=>LoginPage()), (route) => false);
-    _sharedPrefs.setBool(SAVE_KEY_NAME, false);
-  }
+  
 
 
 

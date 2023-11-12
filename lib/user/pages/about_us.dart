@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 
 class AboutUsPage extends StatefulWidget {
   const AboutUsPage({super.key});
@@ -34,7 +35,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
     return Scaffold(
 
         appBar: AppBar(
-          title: Text("About us",style: TextStyle(fontWeight: FontWeight.w500),),
+          title: Text("ABOUT US",style: appBarTitleStyle()),
           centerTitle: true,
           toolbarHeight: 80,
         ),
@@ -55,14 +56,14 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   ),
                       SizedBox(height: 40,),
                   Text("Medilink Hospitals is one of the topmost healthcare providers in India. Our hospitals are renowned for their medical infrastructure and expertise as we have some of the finest doctors in the country, supported by ultra-modern technologies, research-based care in a warm & comforting environment. Our trusted doctors and a team of specialists work closely together to provide the best of healthcare.",
-                      textAlign: TextAlign.justify,style: TextStyle(fontSize: 20),),
+                      textAlign: TextAlign.justify,style: aboutUsText(),),
                       SizedBox(height: 30,),
                    Text("Our Values",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500,color: Colors.indigo),),   
-                   SizedBox(height: 30,),
+                   SizedBox(height: 10,),
 
                   //card1
                    Card(
-                      color: Colors.grey[200],
+                      color: Colors.grey[50],
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -77,11 +78,11 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           ],
                         ),
                       ),
-                    ),
+                    ),SizedBox(height: 20,),
 
                     //card2
                    Card(
-                      color: Colors.grey[200],
+                      color: Colors.grey[50],
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -96,11 +97,11 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           ],
                         ),
                       ),
-                    ),
+                    ),SizedBox(height: 20,),
 
                      //card3
                    Card(
-                      color: Colors.grey[200],
+                      color: Colors.grey[50],
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -115,21 +116,24 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           ],
                         ),
                       ),
-                    ),
+                    ),SizedBox(height: 25,),
 
 
                     //contact us
-
-                    SizedBox(height: 30,),
-                   Text("Contact Us",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500,color: Colors.indigo),),   
-                   SizedBox(height: 30,),
+                   Text("Contact Us",style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.indigo),),   
+                   SizedBox(height: 10,),
                 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     IconButton(onPressed: (){}, icon: Icon(Icons.phone)),
                     IconButton(onPressed: (){}, icon: Icon(Icons.email)),
                     IconButton(onPressed: (){}, icon: Icon(Icons.facebook)),
-                    IconButton(onPressed: (){}, icon: Icon(Icons.telegram))
+                    IconButton(onPressed: (){}, icon: Icon(Icons.telegram)),
+                    IconButton(onPressed: (){}, icon: Icon(Icons.map))
                   ],
                 ),
                 // Row(
@@ -159,10 +163,4 @@ class _AboutUsPageState extends State<AboutUsPage> {
         //     backgroundColor:Color.fromARGB(143, 102, 240, 107),),
     );
   }
-
-  TextStyle cardname() => TextStyle(color: const Color.fromARGB(255, 113, 124, 185));
-
-  TextStyle cardcontent() => TextStyle();
-
-  TextStyle cardtitle() => TextStyle(fontSize: 20,color: Colors.indigo,fontWeight: FontWeight.w500);
 }

@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:medilink/admin/db/telemedicine_functions.dart';
 import 'package:medilink/admin/model/telemedicine_model.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 import 'package:medilink/user/mainpage.dart';
 import 'package:navigator/navigator.dart' as navigator;
 
@@ -32,7 +33,7 @@ class _TelemedicinePageState extends State<TelemedicinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Telemedicine")),
+      appBar: AppBar(title: Text("TELEMEDICINE",style: appBarTitleStyle(),)),
       //backgroundColor: Colors.amber,
       body: SingleChildScrollView(
         child: Column(
