@@ -1,8 +1,9 @@
 
+
 import 'package:hive_flutter/hive_flutter.dart';
 part 'doctor_model.g.dart';
 
-@HiveType(typeId: 6)
+@HiveType(typeId: 3)
 class DoctorModel{
 
   @HiveField(0)
@@ -29,7 +30,10 @@ class DoctorModel{
   @HiveField(7)
   final String specialization;
 
-  DoctorModel({required this.name,required this.gender,required this.qualification,required this.dob,required this.doj,required this.hospital,required this.specialization,this.id});
+  @HiveField(8)
+  String photo; 
+
+  DoctorModel({required this.name,required this.gender,required this.qualification,required this.dob,required this.doj,required this.hospital,required this.specialization,required this.photo, this.id});
 
 
 }

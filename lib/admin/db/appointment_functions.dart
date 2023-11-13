@@ -21,3 +21,10 @@ Future<void> getAppointment() async{
   appointmentListNotifier.value.addAll(appointmentDB.values);
   appointmentListNotifier.notifyListeners();
 }
+
+//to get appointment count
+Future<int> appointmentStats() async{
+  final appointmentDB = await Hive.openBox<AppointmentModel>('appointment_db');
+  final appointmentCount=appointmentDB.length;
+  return appointmentCount;
+}

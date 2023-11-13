@@ -8,7 +8,7 @@ part of 'doctor_model.dart';
 
 class DoctorModelAdapter extends TypeAdapter<DoctorModel> {
   @override
-  final int typeId = 6;
+  final int typeId = 3;
 
   @override
   DoctorModel read(BinaryReader reader) {
@@ -24,6 +24,7 @@ class DoctorModelAdapter extends TypeAdapter<DoctorModel> {
       doj: fields[5] as String,
       hospital: fields[6] as String,
       specialization: fields[7] as String,
+      photo: fields[8] as String,
       id: fields[0] as int?,
     );
   }
@@ -31,7 +32,7 @@ class DoctorModelAdapter extends TypeAdapter<DoctorModel> {
   @override
   void write(BinaryWriter writer, DoctorModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -47,7 +48,9 @@ class DoctorModelAdapter extends TypeAdapter<DoctorModel> {
       ..writeByte(6)
       ..write(obj.hospital)
       ..writeByte(7)
-      ..write(obj.specialization);
+      ..write(obj.specialization)
+      ..writeByte(8)
+      ..write(obj.photo);
   }
 
   @override

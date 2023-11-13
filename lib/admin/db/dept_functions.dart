@@ -46,6 +46,13 @@ Future<List<DepartmentModel>> searchDepartments(String keyword) async {
   return filteredDepartments;
 }
 
+//to get department count
+Future<int> departmentStats() async{
+  final deptDB = await Hive.openBox<DepartmentModel>('dept_db');
+  final deaprtmentCount=deptDB.length;
+  return deaprtmentCount;
+}
+
 //to edit departments
 // Future<void> editDepartment(int id, String updatedDepartmentName) async {
 //   final deptBox = await Hive.openBox<DepartmentModel>('dept_db');

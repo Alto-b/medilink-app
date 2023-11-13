@@ -18,8 +18,15 @@ Future<void> addUser(UserModel value) async{
 
 //to delete users
 Future<void> deleteUser(int id) async{
-  final deptDB = await Hive.openBox<UserModel>('user_db');
-  await deptDB.delete(id);
+  final userDB = await Hive.openBox<UserModel>('user_db');
+  await userDB.delete(id);
+}
+
+//to get user count
+Future<int> userStats() async{
+  final userDB = await Hive.openBox<UserModel>('user_db');
+  final userCount=userDB.length;
+  return userCount;
 }
 
 //to get user info

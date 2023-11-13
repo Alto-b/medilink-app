@@ -3,9 +3,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medilink/admin/db/doctor_functions.dart';
+import 'package:medilink/admin/model/deptmodel.dart';
 import 'package:medilink/admin/model/doctor_model.dart';
+import 'package:medilink/user/pages/specializations.dart';
 
 class AddDoctor extends StatefulWidget {
   const AddDoctor({super.key});
@@ -26,9 +29,9 @@ class _AddDoctorState extends State<AddDoctor> {
   final List<String> genderOptions = ['Male', 'Female', 'Not Specified'];
   String? selectedHospital;
   final List<String> hospitalOptions = ['Male', 'Female', 'Not Specified'];
-  String? selectedQualification;
-  final List<String> qualificationOptions = ['Male', 'Female', 'Not Specified'];
-  
+   String? selectedSpecialization;
+   final List<String> SpecializationOptions = ['a', 's', 'd'];
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,7 @@ class _AddDoctorState extends State<AddDoctor> {
                         //borderRadius: BorderRadius.circular(10)
                       ),
                       child: _selectedImage != null
-                          ? Image.file(_selectedImage!, fit: BoxFit.fill,)
+                          ? Image.file(_selectedImage! as File, fit: BoxFit.fill,)
                           : Center(
                               child: Icon(Icons.add_a_photo))),
                 ),
@@ -170,7 +173,7 @@ class _AddDoctorState extends State<AddDoctor> {
                     }
                     return null;
                   },
-                  value: selectedGender,
+                  value: selectedHospital,
                   items:genderOptions.map((String gender) {
                     return DropdownMenuItem<String>(
                       value: gender,
@@ -179,7 +182,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   }).toList() ,
                    onChanged: (String? newValue){
                     setState(() {
-                      selectedGender=newValue!;
+                      selectedHospital=newValue!;
                     });
                    },
                    decoration: InputDecoration(
@@ -189,13 +192,13 @@ class _AddDoctorState extends State<AddDoctor> {
 //department selection
                 DropdownButtonFormField(
                   validator: (value){
-                    if(value == null || value.isEmpty){
+                    if(value == null ){
                       return "select Specialization";
                     }
                     return null;
                   },
-                  value: selectedGender,
-                  items:genderOptions.map((String gender) {
+                  value: selectedSpecialization,
+                  items:SpecializationOptions.map((String gender) {
                     return DropdownMenuItem<String>(
                       value: gender,
                       child: Text(gender)
@@ -203,7 +206,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   }).toList() ,
                    onChanged: (String? newValue){
                     setState(() {
-                      selectedGender=newValue!;
+                      selectedSpecialization=newValue!;
                     });
                    },
                    decoration: InputDecoration(
@@ -322,16 +325,18 @@ Future<void> _pickImage() async {
 }
 
 Future<void> submit() async{
+  final imagepath=_selectedImage!.path;
   final String name=_nameController.text.trim();
   final String gender=selectedGender ?? "";
   final String qualification=_qualificationController.text.trim();
   final String dob=_dobController.text.trim();
   final String doj=_dojController.text.trim();
   final String hospital=selectedHospital ?? "";
-  final String specialization=selectedQualification ?? "";
+  final String specialization=selectedSpecialization ?? "";
+
 
   if(_formKey.currentState!.validate()){
-    final _doctor=DoctorModel(name: name, gender: gender, qualification: qualification, dob: dob, doj: doj, hospital: hospital, specialization: specialization);
+    final _doctor=DoctorModel(name: name, gender: gender, qualification: qualification, dob: dob, doj: doj, hospital: hospital, specialization: specialization,photo:imagepath);
     addDoctor(_doctor);
     showSnackBarSuccess(context, "Details added successfully!");
   }

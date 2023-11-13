@@ -73,3 +73,12 @@ Icon getGenderIcon(String gender) {
 
 //profile page text style
 TextStyle ProfileTextStyle() => TextStyle(fontWeight: FontWeight.w600);
+
+//doctor list title
+
+  TextStyle doctorListTitle() => TextStyle(fontWeight: FontWeight.w500);
+
+//doctor list subtitle
+  TextStyle doctorListSubtitle() => TextStyle(
+    fontWeight: FontWeight.w500
+  );

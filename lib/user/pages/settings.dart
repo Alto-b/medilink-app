@@ -8,6 +8,7 @@ import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/login.dart';
 import 'package:medilink/main.dart';
 import 'package:medilink/styles/custom_widgets.dart';
+import 'package:medilink/user/pages/help_center.dart';
 import 'package:medilink/user/pages/profilepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -66,6 +67,9 @@ class _SettingsPageState extends State<SettingsPage> {
             ListTile(
               leading: Icon(Icons.help),
               title: Text("HELP CENTER",style: listtileTitleStyle(),),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HelpCenterPage(),));
+              },
             ),
             ListTile(
               leading: Icon(Icons.logout_outlined),

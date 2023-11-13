@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:medilink/admin/pages/doctor_list.dart';
 import 'package:medilink/user/pages/about_us.dart';
 import 'package:medilink/user/pages/book_appointment.dart';
 import 'package:medilink/user/pages/feedback.dart';
@@ -98,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                           ))
                         ]),
                       ),
-                      //our doctors
+                      //our specialization 
                       Container(
                         alignment: Alignment.center,
                         height: 100,width: 100,
@@ -121,7 +122,9 @@ class _HomePageState extends State<HomePage> {
                         height: 100,width: 100,
                         decoration:optionsBoxDecoration() ,
                         child: Column(children: [
-                          TextButton(onPressed: (){}, child: Column(
+                          TextButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorListPage(),));
+                          }, child: Column(
                             children: [
                               Icon(Icons.group_outlined,size: 50,),
                               Text("Our ",style: TextStyle(fontSize:11),textAlign: TextAlign.center),

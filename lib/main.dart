@@ -26,7 +26,7 @@ void main() async{
    Hive.openBox<FeedBackModel>('feedback_db');
    Hive.openBox<TelemedicineModel>('telemedicine_db');
    Hive.openBox<AppointmentModel>('appointment_db');
-   Hive.openBox<DoctorModelAdapter>('doctor_db');
+   Hive.openBox<DoctorModel>('doctor_db');
   
   if(!Hive.isAdapterRegistered(DepartmentModelAdapter().typeId)){
       Hive.registerAdapter(DepartmentModelAdapter());
