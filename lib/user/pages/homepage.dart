@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:medilink/admin/pages/doctor_list.dart';
 import 'package:medilink/user/pages/about_us.dart';
 import 'package:medilink/user/pages/book_appointment.dart';
+import 'package:medilink/user/pages/doctor_view.dart';
 import 'package:medilink/user/pages/feedback.dart';
 import 'package:medilink/user/pages/hospitals.dart';
 import 'package:medilink/user/pages/my_appointments.dart';
@@ -123,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                         decoration:optionsBoxDecoration() ,
                         child: Column(children: [
                           TextButton(onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorListPage(),));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorViewPage(),));
                           }, child: Column(
                             children: [
                               Icon(Icons.group_outlined,size: 50,),

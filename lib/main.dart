@@ -59,15 +59,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Medilink',
       debugShowCheckedModeBanner: false,
+      
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           centerTitle: true,
-          iconTheme: IconThemeData(
-            //color: Colors.white,
-          )
         ),
         //colorScheme: ColorScheme.fromSeed(seedColor: Color(0x001abc8d)),
         // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightGreen,cardColor: const Color.fromARGB(255, 255, 255, 255)),
@@ -75,16 +74,12 @@ class MyApp extends StatelessWidget {
                                               error: Colors.red[400],
                                           ),
         useMaterial3: true,
-      ),
+       ),
+       home: Splash(),
+     
 
-      //theme: DarkThemeData(),
-      home: Splash()
-    );
-  }
 
-  ThemeData DarkThemeData() {
-    return ThemeData(
-      brightness: Brightness.dark
+
     );
   }
 }

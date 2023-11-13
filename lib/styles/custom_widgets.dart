@@ -77,11 +77,14 @@ TextStyle ProfileTextStyle() => TextStyle(fontWeight: FontWeight.w600);
 //doctor list title
 
   TextStyle doctorListTitle() => TextStyle(
-    fontWeight: FontWeight.w500);
+    fontWeight: FontWeight.w600,
+    fontSize: 18
+    );
 
 //doctor list subtitle
   TextStyle doctorListSubtitle() => TextStyle(
-    fontWeight: FontWeight.w500
+    fontWeight: FontWeight.w500,
+    fontSize: 15
   );
 
   //Statistics card counts

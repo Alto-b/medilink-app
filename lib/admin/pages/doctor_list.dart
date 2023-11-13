@@ -15,17 +15,17 @@ class DoctorListPage extends StatefulWidget {
 
 class _DoctorListPageState extends State<DoctorListPage> {
 
-  // @override
-  // void initState(){
-  //   super.initState();
-  //    getDoctor();
-  // }
+  @override
+  void initState(){
+    super.initState();
+     getDoctor();
+  }
 
 
 
   @override
   Widget build(BuildContext context) {
-getDoctor();
+//  getDoctor();
    
 
     return Scaffold(
@@ -94,7 +94,7 @@ getDoctor();
                                   radius: 40,
                                   backgroundImage: FileImage(File(data.photo)),
                                 ),
-                                title: Text("Name: ${data.name}",style:doctorListTitle(),),
+                                title: Text("Dr.${data.name}",style:doctorListTitle(),),
                                 contentPadding: EdgeInsets.all(5),      
                                 
                                 subtitle: Column(
