@@ -245,7 +245,6 @@ Future<void> addTelemedicineButton()async{
 
 
   if(_formKey.currentState!.validate()){
-    print("validated");
     final telemedicine=TelemedicineModel(name: name, address: address, email: email, mobile: mobile, symptoms: symptoms, medicine: medicine,date: date);
     addTelemedicine(telemedicine);
     showSnackBarSuccess(context, 'We will contact you soon');

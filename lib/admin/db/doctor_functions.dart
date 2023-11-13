@@ -33,3 +33,10 @@ Future<void> deleteDoctor(int id) async{
   await docDB.delete(id);
   getDoctor();
 }
+
+//to get user count
+Future<int> doctorStats() async{
+  final docDB = await Hive.openBox<DoctorModel>('doctor_db');
+  final docCount=docDB.length;
+  return docCount;
+}

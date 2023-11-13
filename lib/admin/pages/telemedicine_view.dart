@@ -88,10 +88,11 @@ class _TelemedicineViewPageState extends State<TelemedicineViewPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(height: 5,),
+                                Text('${data.date}',style: TextStyle(color: Colors.blue),), 
                                 Text('Medicine: ${data.medicine}'),
                                 Text('Symptoms: ${data.symptoms}'),
                                 Text('Address: ${data.address}'),
-                                //Text('Mobile: ${data.mobile}'), 
+                                
                               ],
                             ),  
                             // trailing:IconButton(onPressed: (){

@@ -76,9 +76,29 @@ TextStyle ProfileTextStyle() => TextStyle(fontWeight: FontWeight.w600);
 
 //doctor list title
 
-  TextStyle doctorListTitle() => TextStyle(fontWeight: FontWeight.w500);
+  TextStyle doctorListTitle() => TextStyle(
+    fontWeight: FontWeight.w500);
 
 //doctor list subtitle
   TextStyle doctorListSubtitle() => TextStyle(
     fontWeight: FontWeight.w500
+  );
+
+  //Statistics card counts
+  TextStyle statisticsCardCount() => TextStyle(
+    fontSize: 35,
+    fontWeight: FontWeight.w700,
+    color: Colors.deepPurple
+    );
+//Statistics card title
+  TextStyle statisticsCardTitle() => TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+    color: Colors.black
+    );
+
+//Statistics container
+  BoxDecoration statsContainer() => BoxDecoration(
+    borderRadius: BorderRadius.circular(20),
+    color: Colors.grey[200]
   );

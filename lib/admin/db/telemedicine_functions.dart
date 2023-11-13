@@ -16,12 +16,23 @@ Future<void> addTelemedicine(TelemedicineModel value) async{
 }
 
 //to read telemedicine
-Future<void> getTelemedicine() async{
+// Future<void> getTelemedicine() async{
+//   final teleDB = await Hive.openBox<TelemedicineModel>('telemedicine_db');
+//   telemedicineListNotifier.value.clear();
+//   telemedicineListNotifier.value.addAll(teleDB.values);
+//   telemedicineListNotifier.notifyListeners();
+// }
+Future<void> getTelemedicine() async {
   final teleDB = await Hive.openBox<TelemedicineModel>('telemedicine_db');
   telemedicineListNotifier.value.clear();
   telemedicineListNotifier.value.addAll(teleDB.values);
+
+  // Sort the list based on the last date in descending order
+  telemedicineListNotifier.value.sort((a, b) => b.date.compareTo(a.date));
+
   telemedicineListNotifier.notifyListeners();
 }
+
 
 //to remove telemedicine enquiry
 Future<void> deleteTelemedicine(int id) async{
