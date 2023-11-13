@@ -14,8 +14,10 @@ class HospitalPage extends StatefulWidget {
 
 class _HospitalPageState extends State<HospitalPage> {
 
+  final _formKey1 = GlobalKey<FormState>();
   final _formKey=GlobalKey<FormState>();
   final _hospitalController=TextEditingController(); 
+  final _editController=TextEditingController();
 
 
   @override
@@ -86,8 +88,7 @@ class _HospitalPageState extends State<HospitalPage> {
                             children:[
                               //edit
                               SlidableAction(onPressed: (context) {
-                                //DepartmentModel _deptname=_departmentController.text as DepartmentModel;
-                                //editDept(data.id!,deptname );
+                               _editSheet(context, data.hosp, data.id);
                               },
                               icon:Icons.edit,
                               backgroundColor: Color.fromARGB(255, 10, 112, 196),
@@ -132,5 +133,35 @@ class _HospitalPageState extends State<HospitalPage> {
     final _hospital = HospModel(hosp: _hosp,id: -1);
     //print(_hosp);
     addHosp(_hospital);
+  }
+
+   void _editSheet(BuildContext context,String department,int id){
+      showModalBottomSheet(context: context, builder:(context) {
+        _editController.text=department;
+                                 return Container(
+                                  
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(25.0),
+                                      child: Form(
+                                        key: _formKey1,
+                                        child: Column(
+                                          children: [
+                                            TextFormField(
+                                              controller: _editController,
+                                              decoration: InputDecoration(
+                                                border: UnderlineInputBorder(),
+                                                hintText: "Department"
+                                              ),
+                                            ),SizedBox(height: 25,),
+                                            ElevatedButton(onPressed: (){
+                                              edithospital(id,_editController.text);
+                                              Navigator.of(context).pop();
+                                            }, child: Text("SAVE"))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                 );
+                               }, );
   }
 }

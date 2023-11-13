@@ -63,8 +63,8 @@ getDoctor();
                                  children: [
                                   //delete
                                   SlidableAction(onPressed: (context) {
-                                    // deleteDept(data.id!);
-                                    // _departmentController.clear();
+                                    deleteDoctor(data.id!);
+                                   
                                   },
                                   icon:Icons.delete,
                                   backgroundColor: Color.fromARGB(255, 248, 3, 3),

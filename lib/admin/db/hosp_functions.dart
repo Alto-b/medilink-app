@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:medilink/admin/db/dept_functions.dart';
 import 'package:medilink/admin/model/hospmodel.dart';
 
 ValueNotifier<List<HospModel>> hospListNotifier=ValueNotifier([]);
@@ -30,6 +31,26 @@ Future<void> deleteHosp(int id)async{
    hospDB.delete(id);
     getHosp();
 
+}
+
+//to edit departments
+Future<void> edithospital(int id, String updatedhospitalName) async {
+  final hospDB = await Hive.openBox<HospModel>('hosp_db');
+  final existingHospital = hospDB.values.firstWhere((hosp) => hosp.id == id);
+
+  if (existingHospital == null) {
+    print("no dept");
+  }
+  else{
+    // Update the department's name
+    existingHospital.hosp = updatedhospitalName;
+
+    // Save the updated department back to Hive
+    await hospDB.put(id, existingHospital);
+    getHosp();
+ 
+
+  }
 }
 
 //to search departments

@@ -101,12 +101,19 @@ void calculateAge() {
               padding: const EdgeInsets.all(20.0),
               child: Container(
                 decoration: optionsBoxDecoration(),
-                height: 400,
+                height: 500,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(maxRadius: 50),
+                        ],
+                      ),
+                      SizedBox(height: 20,),
                       ListTile(
                         leading: Icon(Icons.person,color: Colors.deepPurple,),
                         title: Text("${currentUser!.fullname}",style: ProfileTextStyle(),),

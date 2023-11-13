@@ -54,22 +54,21 @@ Future<int> departmentStats() async{
 }
 
 //to edit departments
-// Future<void> editDepartment(int id, String updatedDepartmentName) async {
-//   final deptBox = await Hive.openBox<DepartmentModel>('dept_db');
-//   final existingDepartment = deptBox.values.firstWhere((dept) => dept.id == id, orElse: (){
-//     print("null") ; 
-//   });
+Future<void> editDepartment(int id, String updatedDepartmentName) async {
+  final deptBox = await Hive.openBox<DepartmentModel>('dept_db');
+  final existingDepartment = deptBox.values.firstWhere((dept) => dept.id == id);
 
-//   if (existingDepartment == null) {
-//     print("no dept");
-//   }
-//   else{
-//     // Update the department's name
-//     existingDepartment.dept = updatedDepartmentName;
+  if (existingDepartment == null) {
+    print("no dept");
+  }
+  else{
+    // Update the department's name
+    existingDepartment.dept = updatedDepartmentName;
 
-//     // Save the updated department back to Hive
-//     await deptBox.put(id, existingDepartment);
+    // Save the updated department back to Hive
+    await deptBox.put(id, existingDepartment);
+    getDepartment();
  
 
-//   }
-// }
+  }
+}

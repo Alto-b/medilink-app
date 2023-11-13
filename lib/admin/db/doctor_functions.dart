@@ -26,3 +26,10 @@ Future<void> getDoctor() async {
 
   doctorListNotifier.notifyListeners();
 }
+
+//to delete doctors
+Future<void> deleteDoctor(int id) async{
+  final docDB = await Hive.openBox<DoctorModel>('doctor_db');
+  await docDB.delete(id);
+  getDoctor();
+}

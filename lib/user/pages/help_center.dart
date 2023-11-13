@@ -16,9 +16,7 @@ class HelpCenterPage extends StatefulWidget {
 class _HelpCenterPageState extends State<HelpCenterPage> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   final TextEditingController _subjectController=TextEditingController();
-  final TextEditingController _contentController=TextEditingController();
   final TextEditingController _bodyController=TextEditingController();
 
   @override
@@ -31,8 +29,9 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
 
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SizedBox(height: 5,),
             Text("Write to Us !"),
             Text(""),
             Padding(
@@ -43,20 +42,23 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
                 children: [
             
                   TextFormField(
+                    validator: validateEmpty,
                     controller:_subjectController,
                     decoration: InputDecoration(
                       border: UnderlineInputBorder(),
                       hintText: "Subject"
                     ),
-                  ),
+                  ),SizedBox(height: 20,),
             
                  TextFormField(
+                  validator: validateEmpty,
                     controller:_bodyController,
+                    maxLines: null,
                     decoration: InputDecoration(
                       border: UnderlineInputBorder(),
                       hintText: "Content"
                     ),
-                  ),
+                  ),SizedBox(height: 20,),
             
                  ElevatedButton(onPressed: (){
                   launchEmail();
@@ -71,9 +73,28 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
         ),
       ),
     );
+    
   }
+  
+
+  //to validate cannot be empty
+String? validateEmpty(String? value) {
+  
+  final trimmedValue = value?.trim();
+
+  if (trimmedValue == null || trimmedValue.isEmpty) {
+    return 'Cannot be empty';
+  }
+  return null; 
+}
+
+ 
 
   Future<void> launchEmail() async {
+
+     if(_formKey.currentState!.validate()){
+
+  
 
     final subject=_subjectController.text.trim();
     final body=_bodyController.text.trim();
@@ -88,16 +109,14 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
     );
 
     // if (await canLaunchUrl(_emailLaunchUri)) {
-      print("trying to send");
       await launchUrl(_emailLaunchUri);
-      print("sended");
     // } 
     // else {
     //   //throw 'Could not launch email app';
     //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     //   content: Text('Error launching email app'),));
     // }
-  }
+  }}
 
 
 

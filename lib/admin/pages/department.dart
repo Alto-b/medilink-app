@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:hive/hive.dart';
 import 'package:medilink/admin/db/dept_functions.dart';
 import 'package:medilink/admin/model/deptmodel.dart';
 
@@ -16,7 +17,9 @@ class DepartmentPage extends StatefulWidget {
 class _DepartmentPageState extends State<DepartmentPage> {
 
   final _departmentController=TextEditingController();
+  final _editController=TextEditingController();
     final _formKey = GlobalKey<FormState>();
+    final _formKey1 = GlobalKey<FormState>();
 
 // //to generate a unique key
 //     int generateUniqueId() {
@@ -110,10 +113,9 @@ class _DepartmentPageState extends State<DepartmentPage> {
                              children: [
                               //edit
                               SlidableAction(onPressed: (context) {
-                                //DepartmentModel _deptname=_departmentController.text as DepartmentModel;
-                                // editDept(data.id!,deptname );
-                               // editDepartment(data.id!, _departmentController.text);
-                              },
+
+                             _editSheet(context,data.dept,data.id!);
+                                 },
                               icon:Icons.edit,
                               backgroundColor: Color.fromARGB(255, 10, 112, 196),
                               ),
@@ -151,5 +153,34 @@ class _DepartmentPageState extends State<DepartmentPage> {
         ),
       ),
     );
+  }
+  void _editSheet(BuildContext context,String department,int id){
+      showModalBottomSheet(context: context, builder:(context) {
+        _editController.text=department;
+                                 return Container(
+                                  
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(25.0),
+                                      child: Form(
+                                        key: _formKey1,
+                                        child: Column(
+                                          children: [
+                                            TextFormField(
+                                              controller: _editController,
+                                              decoration: InputDecoration(
+                                                border: UnderlineInputBorder(),
+                                                hintText: "Department"
+                                              ),
+                                            ),SizedBox(height: 25,),
+                                            ElevatedButton(onPressed: (){
+                                              editDepartment(id,_editController.text);
+                                              Navigator.of(context).pop();
+                                            }, child: Text("SAVE"))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                 );
+                               }, );
   }
 }

@@ -9,7 +9,7 @@ class HospModel extends HiveObject{
     int id;
 
   @HiveField(1)
-  final String hosp;
+   String hosp;
 
   HospModel({required this.hosp,required this.id});
 } 
