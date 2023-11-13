@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -90,36 +92,19 @@ String? validateEmpty(String? value) {
 
  
 
-  Future<void> launchEmail() async {
-
-     if(_formKey.currentState!.validate()){
-
-  
-
-    final subject=_subjectController.text.trim();
-    final body=_bodyController.text.trim();
-
-    final Uri _emailLaunchUri = Uri(
+//to send email
+Future<void> launchEmail() async {
+  if (_formKey.currentState!.validate()) {
+    final subject = _subjectController.text.trim();
+    final body = _bodyController.text.trim();
+    final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
-      path: 'nu3347145@gmail.com', // Add your recipient email address here
-      queryParameters: {
-        'subject': subject,
-        'body': body,
-      },
+      path: 'nu3347145@gmail.com',
+      query: 'body=$body&subject=$subject'
     );
-
-    // if (await canLaunchUrl(_emailLaunchUri)) {
-      await launchUrl(_emailLaunchUri);
-    // } 
-    // else {
-    //   //throw 'Could not launch email app';
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //   content: Text('Error launching email app'),));
-    // }
-  }}
-
-
-
+    await launchUrl(emailLaunchUri);
+  }
+}
 
 
 }
