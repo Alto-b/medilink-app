@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/admin/pages/appointment_view.dart';
 import 'package:medilink/admin/pages/department.dart';
 import 'package:medilink/admin/pages/doctor.dart';
@@ -11,6 +12,7 @@ import 'package:medilink/admin/pages/hospital.dart';
 import 'package:medilink/admin/pages/statistics.dart';
 import 'package:medilink/admin/pages/telemedicine_view.dart';
 import 'package:medilink/guest/pages/signup.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 import 'package:medilink/user/pages/telemedicine.dart';
 
 class DashBoard extends StatefulWidget {
@@ -23,14 +25,14 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
 
   List<String> titles=[
-  'Appointments',
-  'Statistics',
-  'Department',
-  'Hospitals',
-  'Doctors',
-  'Doctors list',
-  'Telemedicine',
-  'Feedback',
+  'APPOINTMENTS',
+  'STATISTICS',
+  'DEPARTMENTS',
+  'HOSPITALS',
+  'DOCTORS',
+  'DOCTORS LIST',
+  'TELEMEDICINE',
+  'FEEDBACK',
   
   ];
 
@@ -137,7 +139,7 @@ class _DashBoardState extends State<DashBoard> {
     contentPadding: EdgeInsets.only(left: 20, right: 20, top: 50),
     title: Text(
       'Welcome Admin !',
-      style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w500),
+      style: GoogleFonts.play(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w500),
     ),
     subtitle: Text(
       'DASHBOARD',

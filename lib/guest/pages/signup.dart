@@ -37,7 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _nameController=TextEditingController();
   final TextEditingController _dobController=TextEditingController();
   String? selectedGender;
-  final List<String> genderOptions = ['Male', 'Female', 'Others'];
+  final List<String> genderOptions = ['Male', 'Female', 'Not to specify'];
   //final TextEditingController _genderController=TextEditingController();
   final TextEditingController _emailController=TextEditingController();
   final TextEditingController _passwordController=TextEditingController();

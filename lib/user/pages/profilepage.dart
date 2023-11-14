@@ -101,18 +101,18 @@ void calculateAge() {
               padding: const EdgeInsets.all(20.0),
               child: Container(
                 decoration: optionsBoxDecoration(),
-                height: 500,
+                height: 400,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircleAvatar(maxRadius: 50),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     CircleAvatar(maxRadius: 50),
+                      //   ],
+                      // ),
                       SizedBox(height: 20,),
                       ListTile(
                         leading: Icon(Icons.person,color: Colors.deepPurple,),
@@ -134,14 +134,14 @@ void calculateAge() {
                         leading: Icon(Icons.date_range_outlined,color: Colors.amber,),
                         title: Text("$age Years",style: ProfileTextStyle(),),
                       ),
-                       Spacer(),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ElevatedButton(onPressed: (){}, child: Text("Edit profile")),
-                        ],
-                      )
+                      //  Spacer(),
+                      // Row(
+                      //   mainAxisSize: MainAxisSize.max,
+                      //   mainAxisAlignment: MainAxisAlignment.end,
+                      //   children: [
+                      //     ElevatedButton(onPressed: (){}, child: Text("Edit profile")),
+                      //   ],
+                      // )
                     ],
                   ),
                 ),
