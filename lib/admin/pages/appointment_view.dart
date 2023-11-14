@@ -76,7 +76,8 @@ class _AppointmentViewPageState extends State<AppointmentViewPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('${data.title} ${data.name} '),
+                                  Text('${data.date}',style: TextStyle(color: Colors.grey),),
+                                  Text('${data.title} ${data.name} ',style: TextStyle(fontWeight: FontWeight.w700),),
                                   Text("Email : ${data.email}, Mob:${data.mobile}"),
                                   Text("${data.gender} / ${data.marital}")
                                 ],
@@ -85,8 +86,8 @@ class _AppointmentViewPageState extends State<AppointmentViewPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(height: 5,),
-                                  Text('Gender: ${data.dob}'),
-                                  Text('Symptoms: ${data.address}'),
+                                  //Text('Date: ${data.mobile}'),
+                                  Text('Address: ${data.address}'),
                                   //Text('Address: ${data.address}'),
                                   //Text('Mobile: ${data.mobile}'), 
                                 ],

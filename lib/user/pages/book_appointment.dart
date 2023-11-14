@@ -335,12 +335,13 @@ Future<void> addAppointmentButton()async{
   final String email=_emailController.text.trim();
   final String mobile=_mobileController.text.trim();
   final String address=_addressController.text.trim();
+  final DateTime date=DateTime.now();
   
 
 
   if(_formKey.currentState!.validate()){
     //print("validated");
-    final appointment=AppointmentModel(name: name, gender: gender, dob: dob, marital: marital, email: email, mobile: mobile, address: address,title:title ) ;
+    final appointment=AppointmentModel(name: name, gender: gender, dob: dob, marital: marital, email: email, mobile: mobile, address: address,title:title,date: date ) ;
     addAppointment(appointment);
     showSnackBarSuccess(context, 'We will contact you soon');
     Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage(),));

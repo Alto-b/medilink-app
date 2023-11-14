@@ -10,7 +10,7 @@ Future<void> addAppointment(AppointmentModel value) async{
   final appointmentDB = await Hive.openBox<AppointmentModel>('appointment_db');
   final id=await appointmentDB.add(value);
   final data = appointmentDB.get(id);
-  await appointmentDB.put(id,AppointmentModel(name: data!.name, gender: data!.gender, dob: data!.dob, marital: data!.marital, email: data!.email, mobile: data!.mobile, address: data!.address,title: data!.title,id: id));
+  await appointmentDB.put(id,AppointmentModel(name: data!.name, gender: data.gender, dob: data.dob, marital: data.marital, email: data.email, mobile: data.mobile, address: data.address,title: data.title,date: data.date,id: id));
   getAppointment();
 }
 

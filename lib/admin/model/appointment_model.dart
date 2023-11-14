@@ -32,6 +32,9 @@ class AppointmentModel extends HiveObject{
    @HiveField(8)
    String title;
 
-   AppointmentModel({required this.name,required this.gender,required this.dob,required this.marital,required this.email,required this.mobile,required this.address,required this.title, this.id});
+   @HiveField(9)
+   final DateTime date;
+
+   AppointmentModel({required this.name,required this.gender,required this.dob,required this.marital,required this.email,required this.mobile,required this.address,required this.title,required this.date, this.id});
   
 }

@@ -25,6 +25,7 @@ class AppointmentModelAdapter extends TypeAdapter<AppointmentModel> {
       mobile: fields[6] as String,
       address: fields[7] as String,
       title: fields[8] as String,
+      date: fields[9] as DateTime,
       id: fields[0] as int?,
     );
   }
@@ -32,7 +33,7 @@ class AppointmentModelAdapter extends TypeAdapter<AppointmentModel> {
   @override
   void write(BinaryWriter writer, AppointmentModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class AppointmentModelAdapter extends TypeAdapter<AppointmentModel> {
       ..writeByte(7)
       ..write(obj.address)
       ..writeByte(8)
-      ..write(obj.title);
+      ..write(obj.title)
+      ..writeByte(9)
+      ..write(obj.date);
   }
 
   @override
