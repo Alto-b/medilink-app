@@ -9,7 +9,9 @@ import 'package:medilink/guest/db/user_functions.dart';
 import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/login.dart';
 import 'package:email_auth/email_auth.dart';
+import 'package:medilink/main.dart';
 import 'package:medilink/user/mainpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -393,7 +395,9 @@ void userCheck(String email)async{
         //print('$_dept');
       final _user=UserModel(fullname: fullName, dob: dateOfBirth, gender: gender, email: email, password: pass);
       addUser(_user);
-      Navigator.pushReplacement(context,MaterialPageRoute(builder:(context) => LoginPage(),));
+      //Navigator.pushReplacement(context,MaterialPageRoute(builder:(context) => LoginPage(),));
+      login(_emailController.text, _passwordController.text, context);
+      
        
       }
       else{
@@ -415,5 +419,49 @@ void showSnackBar(BuildContext context, String message) {
     ),
   );
 }
+
+//to login
+void login(String email,String password,BuildContext context) async{
+
+final userDB=await Hive.openBox<UserModel>('user_db');
+
+UserModel? user;
+for(var i=0;i<userDB.length;i++){
+  final currentUser = userDB.getAt(i);
+
+  if(currentUser?.email == email && currentUser?.password == password){
+    user=currentUser;
+    break;
+  }
+}
+
+if(user != null){
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool(SAVE_KEY_NAME, true);
+  await saveUserEmail(email);
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage(),));
+
+}
+else{
+  showDialog(
+    context: context, 
+    builder: (context){
+      return AlertDialog(
+       // title : const Text("error"),
+        content: const Text("invalid email or password"),
+        actions: [
+          TextButton(onPressed:() => Navigator.pop(context), 
+          child: Text("Ok"))
+        ],
+      );
+    });
+}
+}
+
+//to set current user
+Future<void> saveUserEmail(String email) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('currentUser', email);
+  }
 
 }
