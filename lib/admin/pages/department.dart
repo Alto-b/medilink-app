@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive/hive.dart';
 import 'package:medilink/admin/db/dept_functions.dart';
 import 'package:medilink/admin/model/deptmodel.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 
 
 class DepartmentPage extends StatefulWidget {
@@ -48,9 +49,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
     return Scaffold(
       
       //appbar
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,  
-        title: Text("Department",style: TextStyle(color: Colors.white)),
+      appBar: AppBar( 
+        title: Text("DEPARTMENTS",style:appBarTitleStyle()),
       ),
 
       //body

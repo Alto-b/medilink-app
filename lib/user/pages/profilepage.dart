@@ -80,6 +80,7 @@ void calculateAge() {
 
       appBar: AppBar(
         title: Text("PROFILE PAGE",style: appBarTitleStyle(),),
+        
       ),
 
       //body

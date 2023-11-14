@@ -22,7 +22,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("STATISTICS"),
+        title: Text("STATISTICS",style: appBarTitleStyle(),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(30.0),

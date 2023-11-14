@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:medilink/admin/db/hosp_functions.dart';
 import 'package:medilink/admin/model/hospmodel.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 
 class HospitalPage extends StatefulWidget {
   const HospitalPage({super.key});
@@ -29,8 +30,7 @@ class _HospitalPageState extends State<HospitalPage> {
 
       //appbar
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        title: Text("Manage hospitals",style: TextStyle(color: Colors.white)),
+        title: Text("MANAGE HOSPITALS",style:appBarTitleStyle()),
       ),
 
       //body

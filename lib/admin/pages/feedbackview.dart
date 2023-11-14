@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:medilink/admin/db/feedback_functions.dart';
 import 'package:medilink/admin/model/feedback_model.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 
 
 class FeedbackViewPage extends StatefulWidget {
@@ -22,7 +23,7 @@ class _FeedbackViewPageState extends State<FeedbackViewPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Feedbacks"),
+        title: Text("FEEDBACKS",style: appBarTitleStyle(),),
         actions: [
           IconButton(onPressed: (){
             setState(() {

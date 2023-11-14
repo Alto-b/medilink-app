@@ -2,10 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:medilink/admin/db/appointment_functions.dart';
 import 'package:medilink/admin/model/appointment_model.dart';
+import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/styles/custom_widgets.dart';
 import 'package:medilink/user/mainpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BookAppointment extends StatefulWidget {
   const BookAppointment({super.key});
@@ -31,6 +34,45 @@ class _BookAppointmentState extends State<BookAppointment> {
   final TextEditingController _emailController=TextEditingController();
   final TextEditingController _mobileController=TextEditingController();
   final TextEditingController _addressController=TextEditingController();
+
+    String userEmail = ''; 
+  UserModel? currentUser;
+  
+   int age=0;
+
+   
+
+   @override
+  void initState() {
+    super.initState();
+    // Call the getUser function when the page is initialized
+    getUser();    
+  }
+
+  Future<void> getUser() async {
+    // Retrieve currentUser email from shared preferences
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+   
+   //if(currentUser != null)
+    userEmail = prefs.getString('currentUser') ?? '';
+    // check the user in Hive using the email
+    final userBox = await Hive.openBox<UserModel>('user_db');
+    currentUser = userBox.values.firstWhere(
+      (user) => user.email == userEmail,
+      //orElse: () => null,
+    );
+    calculateAge();
+    setState(() {}); 
+  }
+void calculateAge() {
+    if (currentUser != null) {
+      String dobString = currentUser!.dob ?? '';
+      DateTime dob = DateTime.parse(dobString);
+      DateTime currentDate = DateTime.now();
+      Duration difference = currentDate.difference(dob);
+      age = (difference.inDays / 365).floor();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -336,12 +378,13 @@ Future<void> addAppointmentButton()async{
   final String mobile=_mobileController.text.trim();
   final String address=_addressController.text.trim();
   final DateTime date=DateTime.now();
+  final String user=currentUser!.fullname;
   
 
 
   if(_formKey.currentState!.validate()){
     //print("validated");
-    final appointment=AppointmentModel(name: name, gender: gender, dob: dob, marital: marital, email: email, mobile: mobile, address: address,title:title,date: date ) ;
+    final appointment=AppointmentModel(name: name, gender: gender, dob: dob, marital: marital, email: email, mobile: mobile, address: address,title:title,date: date,user: user) ;
     addAppointment(appointment);
     showSnackBarSuccess(context, 'We will contact you soon');
     Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage(),));

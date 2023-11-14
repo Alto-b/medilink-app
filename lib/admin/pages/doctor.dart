@@ -8,6 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:medilink/admin/db/doctor_functions.dart';
 import 'package:medilink/admin/model/deptmodel.dart';
 import 'package:medilink/admin/model/doctor_model.dart';
+import 'package:medilink/admin/pages/doctor_list.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 import 'package:medilink/user/pages/specializations.dart';
 
 class AddDoctor extends StatefulWidget {
@@ -38,7 +40,7 @@ class _AddDoctorState extends State<AddDoctor> {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("ADD DOCTORS") ,
+        title: Text("ADD DOCTORS",style: appBarTitleStyle(),) ,
       ),
 
       body: SingleChildScrollView(
@@ -339,6 +341,7 @@ Future<void> submit() async{
     final _doctor=DoctorModel(name: name, gender: gender, qualification: qualification, dob: dob, doj: doj, hospital: hospital, specialization: specialization,photo:imagepath);
     addDoctor(_doctor);
     showSnackBarSuccess(context, "Details added successfully!");
+    Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorListPage(),));
   }
   else{
       showSnackBarFailed(context, "Couldn't add details!");

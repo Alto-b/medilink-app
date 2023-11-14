@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import 'package:medilink/admin/db/appointment_functions.dart';
 import 'package:medilink/admin/model/appointment_model.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppointmentViewPage extends StatefulWidget {
@@ -18,14 +22,14 @@ class _AppointmentViewPageState extends State<AppointmentViewPage> {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("appointments"),
+        title: Text("APPOINTMENTS",style: appBarTitleStyle(),),
       ),
 
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
-                    height: 500,
+                     height: 600,
                     child: ValueListenableBuilder(
                       valueListenable: appointmentListNotifier,
                       builder: (BuildContext ctx, List<AppointmentModel> appointmentList,Widget? child) {
@@ -76,10 +80,16 @@ class _AppointmentViewPageState extends State<AppointmentViewPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('${data.date}',style: TextStyle(color: Colors.grey),),
+                                  Text(
+                                    DateFormat('dd-MM-yyyy HH:mm').format(data.date),
+                                    style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),
+                                  ),
                                   Text('${data.title} ${data.name} ',style: TextStyle(fontWeight: FontWeight.w700),),
-                                  Text("Email : ${data.email}, Mob:${data.mobile}"),
-                                  Text("${data.gender} / ${data.marital}")
+                                  Text("${data.gender} / ${data.marital}"),
+                                  Text("Email : ${data.email}"),
+                                   Text("Mob:${data.mobile}"),
+                                   Text('Address: ${data.address}'),
+                                  
                                 ],
                               )),
                               subtitle: Column(
@@ -87,8 +97,8 @@ class _AppointmentViewPageState extends State<AppointmentViewPage> {
                                 children: [
                                   SizedBox(height: 5,),
                                   //Text('Date: ${data.mobile}'),
-                                  Text('Address: ${data.address}'),
-                                  //Text('Address: ${data.address}'),
+                                  
+                                  Text('Booked by: ${data.user} / ${data.email}'),
                                   //Text('Mobile: ${data.mobile}'), 
                                 ],
                               ),  

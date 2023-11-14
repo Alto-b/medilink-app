@@ -231,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                         ]),
                       ),
                       //our doctors
-                      Container(
+                      Container( 
                         alignment: Alignment.center,
                         height: 100,width: 100,
                         decoration:optionsBoxDecoration() ,

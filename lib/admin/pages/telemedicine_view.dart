@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:medilink/admin/db/telemedicine_functions.dart';
 import 'package:medilink/admin/model/telemedicine_model.dart';
+import 'package:medilink/styles/custom_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TelemedicineViewPage extends StatefulWidget {
@@ -22,7 +23,7 @@ class _TelemedicineViewPageState extends State<TelemedicineViewPage> {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("Telemedicine portal"),
+        title: Text("TELEMEDICINE PORTAL",style: appBarTitleStyle(),),
       ),
 
       //body

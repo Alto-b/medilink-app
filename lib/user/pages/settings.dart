@@ -83,6 +83,11 @@ class _SettingsPageState extends State<SettingsPage> {
             // ),
 
             Spacer(),
+              Column(
+              children: [
+                Text("v.0.0.1")
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children:const [
@@ -90,6 +95,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 Text("Medilink 2023",style: TextStyle(color: Colors.grey),)
               ],
             ),
+          
             
           ],
         ),

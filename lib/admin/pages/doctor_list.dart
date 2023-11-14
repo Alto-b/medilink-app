@@ -31,12 +31,8 @@ class _DoctorListPageState extends State<DoctorListPage> {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("OUR DOCTORS"),
-        actions: [IconButton(onPressed: (){
-          setState(() {
-            
-          });
-        }, icon:Icon( Icons.restore)),]
+        title: Text("OUR DOCTORS",style: appBarTitleStyle(),),
+
       ),
 
       body: SingleChildScrollView(
