@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,75 +28,112 @@ final  TextEditingController _searchController = TextEditingController();
 
       body:SingleChildScrollView(
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-                children: [
-                  //logo
-                  // Image.network('https://i.ibb.co/YZWjL9Y/Screenshot-2023-10-22-204311-removebg-preview.png',
-                  //               width: 200,),
+          child: Column(
+              children: [
+                //logo
+                // Image.network('https://i.ibb.co/YZWjL9Y/Screenshot-2023-10-22-204311-removebg-preview.png',
+                //               width: 200,),
       
-                  //search field
-                  SizedBox(height: 30,),
-                  TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50)
-                        ),
-                        hintText: "Search hospitals"
+                //search field
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      
+                      decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255),
+                       borderRadius: BorderRadius.only(topLeft: Radius.circular(30),bottomLeft: Radius.circular(30)),
+                       boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 10,
+                            offset: Offset(0, 5)
+                          )
+                        ]
+                      ),
+                        child: Icon(Icons.search),
                     ),
-                    onChanged: (query) {
-                      setState(() {
-                        
-                      });
-                    },
-                  ),
-                  SizedBox(height: 40,),
-
-                  //listing specialization
-                  SizedBox(
-                  height: 500,
-                  child: ValueListenableBuilder(
-                    valueListenable: hospListNotifier,
-                    builder: (BuildContext ctx, List<HospModel> hospitalList,Widget? child) {
-                   
-                   //search part
-                   final filteredHospitals=_searchController.text.isEmpty
-                   ?hospitalList
-                   :hospitalList.where((hosp) => 
-                   hosp.hosp.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
-                   
-                   
-                    return ListView.separated(
-                    itemBuilder:((context, index) {
-                      final data=hospitalList[index]; 
-                        return SizedBox(
-                          //height: 500,
-                          child: Container(
-                            decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(15),
-                               color: Colors.blue[400]
+                    Container(
+                      height: 60,
+                      width: 280,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(30),bottomRight: Radius.circular(30)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 10,
+                            offset: Offset(3, 4)
+                          )
+                        ]
+                      ),
+                      child:
+                          TextField(
+                            controller: _searchController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                  borderSide: BorderSide.none
+                                ),
+                                hintText: "Search hospitals"
                             ),
-                            child: ListTile(
-                              //tileColor: Colors.blue,
-                              horizontalTitleGap: 20,
-                              contentPadding: EdgeInsets.all(5),
-                              //leading: Text("${index+1}"),
-                              // title: Align(child: Text(data.dept)),     
-                              title: Align(child: Text(data.hosp,style: TextStyle(fontSize: 20,fontWeight:FontWeight.w500,color: Colors.white ),)),                          
-                            ),
+                            onChanged: (query) {
+                              setState(() {
+                                
+                              });
+                            },
                           ),
-                        );
-                    }) , 
-                   separatorBuilder: ((context, index) {
-                    return const Divider(color: Colors.white,);
-                    }), 
-                  itemCount:filteredHospitals.length);
-                 }, ),
+                       
+                    ),
+                  ],
                 ),
-                ],
-            ),
+                SizedBox(height: 40,),
+
+                //listing specialization
+                SizedBox(
+                height: 500,
+                child: ValueListenableBuilder(
+                  valueListenable: hospListNotifier,
+                  builder: (BuildContext ctx, List<HospModel> hospitalList,Widget? child) {
+                 
+                 //search part
+                 final filteredHospitals=_searchController.text.isEmpty
+                 ?hospitalList
+                 :hospitalList.where((hosp) => 
+                 hosp.hosp.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
+                 
+                 
+                  return ListView.separated(
+                  itemBuilder:((context, index) {
+                    final data=hospitalList[index]; 
+                      return SizedBox(
+                        //height: 500,
+                        child: Container(
+                          decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(15),
+                             color: Colors.blue[400]
+                          ),
+                          child: ListTile(
+                            //tileColor: Colors.blue,
+                            horizontalTitleGap: 20,
+                            contentPadding: EdgeInsets.all(5),
+                            //leading: Text("${index+1}"),
+                            // title: Align(child: Text(data.dept)),     
+                            title: Align(child: Text(data.hosp,style: TextStyle(fontSize: 20,fontWeight:FontWeight.w500,color: Colors.white ),)),                          
+                          ),
+                        ),
+                      );
+                  }) , 
+                 separatorBuilder: ((context, index) {
+                  return const Divider(color: Colors.white,);
+                  }), 
+                itemCount:filteredHospitals.length);
+               }, ),
+              ),
+              ],
           ),
         ),
       )
