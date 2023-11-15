@@ -18,6 +18,7 @@ class DepartmentModelAdapter extends TypeAdapter<DepartmentModel> {
     };
     return DepartmentModel(
       dept: fields[1] as String,
+      photo: fields[2] as String,
       id: fields[0] as int?,
     );
   }
@@ -25,11 +26,13 @@ class DepartmentModelAdapter extends TypeAdapter<DepartmentModel> {
   @override
   void write(BinaryWriter writer, DepartmentModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.dept);
+      ..write(obj.dept)
+      ..writeByte(2)
+      ..write(obj.photo);
   }
 
   @override

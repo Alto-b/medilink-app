@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:medilink/admin/db/dept_functions.dart';
 import 'package:medilink/admin/model/deptmodel.dart';
@@ -111,46 +114,66 @@ final  TextEditingController _searchController = TextEditingController();
                   SizedBox(height: 40,),
 
                   //listing specialization
-                  SizedBox(
-                  height: 500,
-                  child: ValueListenableBuilder(
-                    valueListenable: deptListNotifier,
-                    builder: (BuildContext ctx, List<DepartmentModel> departmentList,Widget? child) {
-                   
-                   //search part
-                   final filteredDepartments=_searchController.text.isEmpty
-                   ?departmentList
-                   :departmentList.where((dept) => 
-                   dept.dept.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
-                   
-                   
-                    return ListView.separated(
-                    itemBuilder:((context, index) {
-                      final data=departmentList[index]; 
-                        return SizedBox(
-                          //height: 500,
-                          child: Container(
-                            decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(15),
-                               color: Colors.blue[400]
-                            ),
-                            child: ListTile(
-                              //tileColor: Colors.blue,
-                              horizontalTitleGap: 20,
-                              contentPadding: EdgeInsets.all(5),
-                              //leading: Text("${index+1}"),
-                              // title: Align(child: Text(data.dept)),     
-                              title: Align(child: Text(data.dept,style: TextStyle(fontSize: 20,fontWeight:FontWeight.w500,color: Colors.white ),)),                          
-                            ),
-                          ),
-                        );
-                    }) , 
-                   separatorBuilder: ((context, index) {
-                    return const Divider(color: Colors.white,);
-                    }), 
-                  itemCount:filteredDepartments.length);
-                 }, ),
+    Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: SizedBox(
+      height: 500,
+      child: ValueListenableBuilder(
+      valueListenable: deptListNotifier,
+      builder: (BuildContext ctx, List<DepartmentModel> departmentList, Widget? child) {
+        // Search part
+        final filteredDepartments = _searchController.text.isEmpty
+            ? departmentList
+            : departmentList.where((dept) =>
+                dept.dept.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
+    
+        return GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 8.0, // You can adjust the spacing as needed
+            mainAxisSpacing: 8.0,
+          ),
+          itemBuilder: ((context, index) {
+            final data = departmentList[index];
+            return Card(
+              elevation: 10,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              color:Colors.grey[100],
+              child: ListTile(
+                horizontalTitleGap: 20,
+                contentPadding: EdgeInsets.all(5),
+                title: Align(
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: FileImage(
+                          File(data.photo),
+                        ),
+                      ),
+                      Text(
+                        data.dept,
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.deepPurple),
+                      ),
+                    ],
+                  ),
                 ),
+              ),
+            );
+          }),
+          itemCount: filteredDepartments.length,
+        );
+      },
+      ),
+    ),
+    )
+                
+
+
+
                 ],
             ),
           ),

@@ -13,7 +13,7 @@ Future<void> addDepartment(DepartmentModel value) async{
   final deptBox = await Hive.openBox<DepartmentModel>('dept_db');
   final id=await deptBox.add(value);
   final data = deptBox.get(id);
-  await deptBox.put(id,DepartmentModel(dept: data!.dept,id: id) );
+  await deptBox.put(id,DepartmentModel(dept: data!.dept,photo: data.photo,id: id) );
   getDepartment();
 }
 

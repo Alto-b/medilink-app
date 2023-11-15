@@ -11,5 +11,8 @@ class DepartmentModel extends HiveObject{
   @HiveField(1)
    String dept;
 
-  DepartmentModel({required this.dept, this.id});
+  @HiveField(2)
+    String photo;
+
+  DepartmentModel({required this.dept,required this.photo, this.id});
 }
