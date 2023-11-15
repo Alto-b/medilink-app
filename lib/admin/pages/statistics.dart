@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:medilink/admin/db/appointment_functions.dart';
 import 'package:medilink/admin/db/dept_functions.dart';
 import 'package:medilink/admin/db/doctor_functions.dart';
+import 'package:medilink/admin/db/telemedicine_functions.dart';
 import 'package:medilink/admin/model/doctor_model.dart';
 import 'package:medilink/admin/pages/appointment_view.dart';
 import 'package:medilink/admin/pages/doctor_list.dart';
+import 'package:medilink/admin/pages/telemedicine_view.dart';
 import 'package:medilink/guest/db/user_functions.dart';
 import 'package:medilink/styles/custom_widgets.dart';
 
@@ -32,7 +34,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
             crossAxisSpacing: 10.0,
             mainAxisSpacing: 10.0,
           ),
-          itemCount: 3, // Number of items in the GridView
+          itemCount: 4, // Number of items in the GridView
           itemBuilder: (context, index) {
             // You can customize each grid item based on the index
             switch (index) {
@@ -111,6 +113,35 @@ class _StatisticsPageState extends State<StatisticsPage> {
                             children: [
                               Text('APPOINTMENTS',style: statisticsCardTitle(),),
                               Text('$appointmentCount',style: statisticsCardCount(),),
+                            ],
+                          ));
+                        }
+                      },
+                    ),
+                  ),
+                );
+//telemedicine count
+              case 3:
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>TelemedicineViewPage()));
+                  },
+                  child: Container(
+                    decoration: statsContainer(),
+                    child: FutureBuilder<int>(
+                      future: telemedicineStats(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        } else if (snapshot.hasError) {
+                          return Center(child: Text('Error: ${snapshot.error}'));
+                        } else {
+                          final telemedicineCount = snapshot.data!;
+                          return Center(child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('TELEMEDICINE',style: statisticsCardTitle(),),
+                              Text('$telemedicineCount',style: statisticsCardCount(),),
                             ],
                           ));
                         }

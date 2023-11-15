@@ -40,3 +40,10 @@ Future<void> deleteTelemedicine(int id) async{
   await teleDB.delete(id);
   getTelemedicine();
 }
+
+//to get telemedicine count
+Future<int> telemedicineStats() async{
+  final teleDB = await Hive.openBox<TelemedicineModel>('telemedicine_db');
+  final telemedicineCount=teleDB.length;
+  return telemedicineCount;
+}

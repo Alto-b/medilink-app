@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:medilink/admin/db/doctor_functions.dart';
 import 'package:medilink/admin/model/deptmodel.dart';
 import 'package:medilink/admin/model/doctor_model.dart';
+import 'package:medilink/admin/model/hospmodel.dart';
 import 'package:medilink/admin/pages/doctor_list.dart';
 import 'package:medilink/styles/custom_widgets.dart';
 import 'package:medilink/user/pages/specializations.dart';
@@ -29,11 +30,42 @@ class _AddDoctorState extends State<AddDoctor> {
   final TextEditingController _dojController=TextEditingController();
   String? selectedGender;
   final List<String> genderOptions = ['Male', 'Female', 'Not Specified'];
-  String? selectedHospital;
-  final List<String> hospitalOptions = ['Male', 'Female', 'Not Specified'];
-   String? selectedSpecialization;
-   final List<String> SpecializationOptions = ['a', 's', 'd'];
+  // String? selectedHospital;
+  // final List<String> hospitalOptions = ['Male', 'Female', 'Not Specified'];
+  //  String? selectedSpecialization;
+  //   List<String> SpecializationOptions = ['q','w'];
 
+ late Box<DepartmentModel> deptBox;
+  late Box<HospModel> hospBox;
+  List<DepartmentModel> departments = [];
+  List<HospModel> hospitals = [];
+  String? selectedDepartmentName;
+  String? selectedHospitalName;
+
+  @override
+  void initState() {
+    super.initState();
+    openHiveBoxes();
+  }
+Future<void> openHiveBoxes() async {
+    deptBox = await Hive.openBox<DepartmentModel>('dept_db');
+    hospBox = await Hive.openBox<HospModel>('hosp_db');
+    updateLists();
+  }
+void updateLists() {
+    setState(() {
+      departments = deptBox.values.toList();
+      hospitals = hospBox.values.toList();
+
+      if (!departments.any((dept) => dept.dept == selectedDepartmentName)) {
+        selectedDepartmentName = null;
+      }
+
+      if (!hospitals.any((hosp) => hosp.hosp == selectedHospitalName)) {
+        selectedHospitalName = null;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,52 +200,81 @@ class _AddDoctorState extends State<AddDoctor> {
                   ),SizedBox(height: 20,),
 
 //hospital selection
-                DropdownButtonFormField(
+                // DropdownButtonFormField(
+                //   validator: (value){
+                //     if(value == null || value.isEmpty){
+                //       return "select Hospital";
+                //     }
+                //     return null;
+                //   },
+                //   value: selectedHospital,
+                //   items:genderOptions.map((String gender) {
+                //     return DropdownMenuItem<String>(
+                //       value: gender,
+                //       child: Text(gender)
+                //       );
+                //   }).toList() ,
+                //    onChanged: (String? newValue){
+                //     setState(() {
+                //       selectedHospital=newValue!;
+                //     });
+                //    },
+                //    decoration: InputDecoration(
+                //     hintText: "Hospital"
+                //    ),),SizedBox(height: 20,),
+                 DropdownButtonFormField<String>(
                   validator: (value){
-                    if(value == null || value.isEmpty){
+                    if(value == null ){
                       return "select Hospital";
                     }
                     return null;
                   },
-                  value: selectedHospital,
-                  items:genderOptions.map((String gender) {
-                    return DropdownMenuItem<String>(
-                      value: gender,
-                      child: Text(gender)
-                      );
-                  }).toList() ,
-                   onChanged: (String? newValue){
-                    setState(() {
-                      selectedHospital=newValue!;
-                    });
-                   },
-                   decoration: InputDecoration(
+                  value: selectedHospitalName,
+                   items: hospitals.map((HospModel hospitals) {
+            return DropdownMenuItem<String>(
+              value: hospitals.hosp,
+              child: Text(hospitals.hosp),
+            );
+          }).toList(),
+          onChanged: (String? newValue) {
+            setState(() {
+              selectedHospitalName = newValue;
+            });
+          },
+          decoration: InputDecoration(
                     hintText: "Hospital"
-                   ),),SizedBox(height: 20,),
+                   ),
+        ),
+                   
+            SizedBox(height: 20,),
 
 //department selection
-                DropdownButtonFormField(
+                DropdownButtonFormField<String>(
                   validator: (value){
                     if(value == null ){
                       return "select Specialization";
                     }
                     return null;
                   },
-                  value: selectedSpecialization,
-                  items:SpecializationOptions.map((String gender) {
-                    return DropdownMenuItem<String>(
-                      value: gender,
-                      child: Text(gender)
-                      );
-                  }).toList() ,
-                   onChanged: (String? newValue){
-                    setState(() {
-                      selectedSpecialization=newValue!;
-                    });
-                   },
-                   decoration: InputDecoration(
+                  value: selectedDepartmentName,
+                   items: departments.map((DepartmentModel department) {
+            return DropdownMenuItem<String>(
+              value: department.dept,
+              child: Text(department.dept),
+            );
+          }).toList(),
+          onChanged: (String? newValue) {
+            setState(() {
+              selectedDepartmentName = newValue;
+            });
+          },
+          decoration: InputDecoration(
                     hintText: "Specialization"
-                   ),),SizedBox(height: 20,),
+                   ),
+        ),
+                   
+            SizedBox(height: 20,),
+  
 
 //submit button
                 ElevatedButton(onPressed: (){
@@ -333,8 +394,8 @@ Future<void> submit() async{
   final String qualification=_qualificationController.text.trim();
   final String dob=_dobController.text.trim();
   final String doj=_dojController.text.trim();
-  final String hospital=selectedHospital ?? "";
-  final String specialization=selectedSpecialization ?? "";
+  final String hospital=selectedHospitalName!;
+  final String specialization=selectedDepartmentName!;
 
 
   if(_formKey.currentState!.validate()){

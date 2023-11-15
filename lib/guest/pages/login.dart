@@ -42,8 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                   children: [
                     SizedBox(height: 50,),
-                    Image.network('https://i.ibb.co/YZWjL9Y/Screenshot-2023-10-22-204311-removebg-preview.png',
-                  width: 200,),
+                     Image.asset('lib/assets/medilink.png',width: 200,),
               SizedBox(height: 50,),
                     
                     //email textfield

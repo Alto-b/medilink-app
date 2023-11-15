@@ -105,7 +105,7 @@ Future<void> getUser() async {
                                 SizedBox(height: 5,),
                                 //Text('Date: ${data.mobile}'),
                                 Text('Address: ${data.address}'),
-                                Text('booked by: ${data.user}'),
+                               // Text('booked by: ${data.user}'),
                                 //Text('Mobile: ${data.mobile}'), 
                               ],
                             ),                  

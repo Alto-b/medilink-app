@@ -26,9 +26,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
 
       appBar: AppBar(
-        title:Image.network(
-          'https://i.ibb.co/YZWjL9Y/Screenshot-2023-10-22-204311-removebg-preview.png',
-          width: 120, ),
+        title:Image.asset('lib/assets/medilink.png',
+        width: 120),
           centerTitle: true,
           toolbarHeight: 90,
       ),
@@ -55,20 +54,20 @@ class _HomePageState extends State<HomePage> {
                 // Add your carousel items here, e.g., Container, Image, or any widget
                 Container(
                   //color: Colors.red,
-                  child: Center(child: Image.network('https://i.ibb.co/N2kV2r6/and-Heal-with-Medi-Link.png')),
+                  child: Center(child: Image.asset('lib/assets/banner1.png')),
                 ),
                 Container(
                   //color: Colors.blue,
-                  child: Center(child: Image.network('https://i.ibb.co/y5Fs7Bg/2-with-Medi-Link.png')),
+                  child: Center(child: Image.asset('lib/assets/banner2.png')),
                 ),
                 Container(
                   //color: Colors.green,
-                  child: Center(child: Image.network('https://i.ibb.co/wYHjX8Z/3-Medi-Link.png')),
+                  child: Center(child: Image.asset('lib/assets/banner3.png')),
                 ),
               ],
             ),
-            SizedBox(height: 30,),
-
+            SizedBox(height: 0,),
+            
            //row1
 
           Padding(

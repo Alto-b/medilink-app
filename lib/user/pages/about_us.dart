@@ -50,8 +50,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.network('https://i.ibb.co/YZWjL9Y/Screenshot-2023-10-22-204311-removebg-preview.png',
-                          width: 200,),
+                    Image.asset('lib/assets/medilink.png',width: 200,)
                     ],
                   ),
                       SizedBox(height: 40,),

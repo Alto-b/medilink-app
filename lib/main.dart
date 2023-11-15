@@ -11,6 +11,10 @@ import 'package:medilink/admin/model/hospmodel.dart';
 import 'package:medilink/admin/model/telemedicine_model.dart';
 import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/guest/pages/splash.dart';
+import 'package:medilink/styles/theme_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+import 'package:medilink/user/pages/settings.dart';
 
 
 const SAVE_KEY_NAME ="UserLoggedIn";
@@ -53,10 +57,15 @@ void main() async{
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
   @override
   Widget build(BuildContext context) {
 
@@ -64,22 +73,35 @@ class MyApp extends StatelessWidget {
       title: 'Medilink',
       debugShowCheckedModeBanner: false,
       
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          centerTitle: true,
-        ),
-        //colorScheme: ColorScheme.fromSeed(seedColor: Color(0x001abc8d)),
-        // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightGreen,cardColor: const Color.fromARGB(255, 255, 255, 255)),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,
-                                              error: Colors.red[400],
-                                          ),
-        useMaterial3: true,
-       ),
+      //theme: oldTheme(),
        home: Splash(),
-     
-
+      // themeMode: ThemeMode.system, 
+      // theme: MyThemes.lightTheme,
+      // darkTheme: MyThemes.darkTheme,
+      theme: oldTheme(),
 
 
     );
   }
+
+  ThemeData newThemedata() {
+    return ThemeData(
+       brightness: Brightness.dark
+    );
+  }
+
+  ThemeData oldTheme() {
+    return ThemeData(
+      appBarTheme: AppBarTheme(
+        centerTitle: true,
+      ),
+      //colorScheme: ColorScheme.fromSeed(seedColor: Color(0x001abc8d)),
+      // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightGreen,cardColor: const Color.fromARGB(255, 255, 255, 255)),
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,
+                                            error: Colors.red[400],
+                                        ),
+      useMaterial3: true,
+     );
+  }
+
 }

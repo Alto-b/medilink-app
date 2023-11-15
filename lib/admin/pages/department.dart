@@ -47,6 +47,20 @@ class _DepartmentPageState extends State<DepartmentPage> {
       }
     }
 
+// //to add department
+//     Future<void> editDepartmentButton() async{
+//       final _dept=_departmentController.text.trim();
+//       final imagepath=_selectedImage!.path;
+//       if(_dept.isEmpty){
+//         //print('empty');
+//         return ;
+//       }
+//       else{
+//       //print('$_dept');
+//       //final _department=DepartmentModel( dept: _dept,photo:imagepath ,id:-1);
+//       editDepartment(id, _dept, imagepath)
+//       }
+//     }
   @override
   Widget build(BuildContext context) {
 
@@ -65,44 +79,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-//               Form(
-//                 key: _formKey,
-//                 child: Column(
-//                 children: [
-//                   SizedBox(height: 20,),
-// //department txt
-//                   TextFormField(
-//                     validator: (value){
-//                       if(value==null || value.isEmpty){
-//                         return 'cannot be empty';
-//                       }
-//                       if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-//                          return 'Only characters are allowed';
-//                       }
-//                       return null;
-//                     },
-//                     controller: _departmentController,
-//                     decoration: InputDecoration(
-//                       hintText: "Enter department"
-//                     ),
-//                   ),
-//                   SizedBox(height: 20,),
-
-// //button          
-//                 ElevatedButton(onPressed: (){
-//                   //print("add button clicked");
-//                   addDepartmentButton();
-//                   _departmentController.clear();
-//                 },
-//                  child: Text("Add")),
-//                  SizedBox(height: 40,)
-        
-//                 ],
-//               )),
-
-
-              //listener
-
               SizedBox(
                   height: 500,
                   child: ValueListenableBuilder(
@@ -120,7 +96,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                               //edit
                               SlidableAction(onPressed: (context) {
 
-                             _editSheet(context,data.dept,data.id!);
+                             _editSheet(context,data.photo,data.dept,data.id!,);
                                  },
                               icon:Icons.edit,
                               backgroundColor: Color.fromARGB(255, 10, 112, 196),
@@ -186,7 +162,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 child: Column(
                 children: [
                   //add photo
-        
                      Row(
                       children: [
                 Padding(
@@ -210,11 +185,6 @@ class _DepartmentPageState extends State<DepartmentPage> {
                         
                       },
                       icon: Icon(Icons.photo_library_outlined),tooltip: "select from gallery",),
-                  // IconButton(
-                  //     onPressed: () {
-                  //       _photoImage();
-                  //     },
-                  //     icon: Icon(Icons.camera_alt_outlined),tooltip: "open camera")
                 ])
               ]),SizedBox(height: 20,),
 
@@ -257,31 +227,69 @@ class _DepartmentPageState extends State<DepartmentPage> {
 
 
  //to edit section
-  void _editSheet(BuildContext context,String department,int id){
+  void _editSheet(BuildContext context,String photo,String department,int id){
       showModalBottomSheet(context: context, builder:(context) {
         _editController.text=department;
-                                 return Container(
-                                  
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(25.0),
-                                      child: Form(
-                                        key: _formKey1,
-                                        child: Column(
-                                          children: [
-                                            TextFormField(
-                                              controller: _departmentController,
-                                              decoration: InputDecoration(
-                                                border: UnderlineInputBorder(),
-                                                hintText: "Add Department"
-                                              ),
-                                            ),SizedBox(height: 25,),
-                                           
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                 );
-                               }, );
+        //_selectedImage=photo as File?;
+      return SingleChildScrollView(
+        child: Container(  
+          height: 600, 
+               child: Padding(
+               padding: const EdgeInsets.all(25.0),
+               child: Form(
+                 key: _formKey1,
+                  child: Column(
+                     children: [
+           //edit photo
+          
+                       Row(
+                        children: [
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: const Color.fromARGB(255, 18, 18, 18)),
+                          //borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: _selectedImage != null
+                            ? Image.file(_selectedImage! as File, fit: BoxFit.fill,)
+                            : Center(
+                                child: Icon(Icons.add_a_photo))),
+                  ),
+                  Column(children: [
+                    IconButton(
+                        onPressed: () {
+                          _pickImage();
+                          
+                        },
+                        icon: Icon(Icons.photo_library_outlined),tooltip: "select from gallery",),
+                  ])
+                ]),SizedBox(height: 20,),
+                             TextFormField(
+                      controller: _editController,
+                      decoration: InputDecoration(
+                      border: UnderlineInputBorder(),
+                      hintText: "Edit Department"
+                 ),
+                       ),SizedBox(height: 25,),
+              ElevatedButton(onPressed: (){
+                    //print("add button clicked");
+                    final String pickedImage=_selectedImage as String;
+                    editDepartment(id,_editController.text,pickedImage);
+                    
+                    _departmentController.clear();
+                    Navigator.pop(context);
+                  },
+                   child: Text("Edit")),   
+                       ],
+                        ),
+                    ),
+                ),
+             ),
+      );
+       }, );
   }
 
   //IMAGE FROM PHOTOS
