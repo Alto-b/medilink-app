@@ -93,46 +93,49 @@ final  TextEditingController _searchController = TextEditingController();
                 SizedBox(height: 40,),
 
                 //listing specialization
-                SizedBox(
-                height: 500,
-                child: ValueListenableBuilder(
-                  valueListenable: hospListNotifier,
-                  builder: (BuildContext ctx, List<HospModel> hospitalList,Widget? child) {
-                 
-                 //search part
-                 final filteredHospitals=_searchController.text.isEmpty
-                 ?hospitalList
-                 :hospitalList.where((hosp) => 
-                 hosp.hosp.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
-                 
-                 
-                  return ListView.separated(
-                  itemBuilder:((context, index) {
-                    final data=hospitalList[index]; 
-                      return SizedBox(
-                        //height: 500,
-                        child: Container(
-                          decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(15),
-                             color: Colors.blue[400]
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                  height: 800,
+                  child: ValueListenableBuilder(
+                    valueListenable: hospListNotifier,
+                    builder: (BuildContext ctx, List<HospModel> hospitalList,Widget? child) {
+                   
+                   //search part
+                   final filteredHospitals=_searchController.text.isEmpty
+                   ?hospitalList
+                   :hospitalList.where((hosp) => 
+                   hosp.hosp.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
+                   
+                   
+                    return ListView.separated(
+                    itemBuilder:((context, index) {
+                      final data=hospitalList[index]; 
+                        return SizedBox(
+                          //height: 800,
+                          child: Container(
+                            decoration: BoxDecoration(
+                               borderRadius: BorderRadius.circular(15),
+                               color: Colors.blue[300]
+                            ),
+                            child: ListTile(
+                              //tileColor: Colors.blue,
+                              horizontalTitleGap: 20,
+                              contentPadding: EdgeInsets.all(5),
+                              //leading: Text("${index+1}"),
+                              // title: Align(child: Text(data.dept)),     
+                              title: Align(child: Text(data.hosp,style: TextStyle(fontSize: 20,fontWeight:FontWeight.w500,color: Colors.white ),)),                          
+                            ),
                           ),
-                          child: ListTile(
-                            //tileColor: Colors.blue,
-                            horizontalTitleGap: 20,
-                            contentPadding: EdgeInsets.all(5),
-                            //leading: Text("${index+1}"),
-                            // title: Align(child: Text(data.dept)),     
-                            title: Align(child: Text(data.hosp,style: TextStyle(fontSize: 20,fontWeight:FontWeight.w500,color: Colors.white ),)),                          
-                          ),
-                        ),
-                      );
-                  }) , 
-                 separatorBuilder: ((context, index) {
-                  return const Divider(color: Colors.white,);
-                  }), 
-                itemCount:filteredHospitals.length);
-               }, ),
-              ),
+                        );
+                    }) , 
+                   separatorBuilder: ((context, index) {
+                    return const Divider(color: Colors.white,);
+                    }), 
+                  itemCount:filteredHospitals.length);
+                               }, ),
+                              ),
+                ),
               ],
           ),
         ),
