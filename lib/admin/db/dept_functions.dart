@@ -53,7 +53,7 @@ Future<int> departmentStats() async{
   return deaprtmentCount;
 }
 
-//to edit departments
+   
 Future<void> editDepartment(int id, String updatedDepartmentName,String updatedPhoto) async {
   final deptBox = await Hive.openBox<DepartmentModel>('dept_db');
   final existingDepartment = deptBox.values.firstWhere((dept) => dept.id == id);
@@ -64,7 +64,7 @@ Future<void> editDepartment(int id, String updatedDepartmentName,String updatedP
   else{
     // Update the department's name
     existingDepartment.dept = updatedDepartmentName;
-    
+    existingDepartment.photo=updatedPhoto;
 
     // Save the updated department back to Hive
     await deptBox.put(id, existingDepartment);

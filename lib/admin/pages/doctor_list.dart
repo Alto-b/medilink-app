@@ -44,7 +44,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
         //listener
                   Container(
                     //color: Colors.red,
-                      height: 600,
+                      height: 690,
                       child: ValueListenableBuilder(
                         valueListenable: doctorListNotifier,
                         builder: (BuildContext ctx, List<DoctorModel> doctorList,Widget? child) {

@@ -80,7 +80,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
           child: Column(
             children: [
               SizedBox(
-                  height: 500,
+                  height: 750,
                   child: ValueListenableBuilder(
                     valueListenable: deptListNotifier,
                     builder: (BuildContext ctx, List<DepartmentModel> departmentList,Widget? child) {
@@ -228,8 +228,10 @@ class _DepartmentPageState extends State<DepartmentPage> {
 
  //to edit section
   void _editSheet(BuildContext context,String photo,String department,int id){
+    _editController.text=department;
+     _selectedImage = File(photo);
       showModalBottomSheet(context: context, builder:(context) {
-        _editController.text=department;
+        
         //_selectedImage=photo as File?;
       return SingleChildScrollView(
         child: Container(  
@@ -254,13 +256,14 @@ class _DepartmentPageState extends State<DepartmentPage> {
                           //borderRadius: BorderRadius.circular(10)
                         ),
                         child: _selectedImage != null
-                            ? Image.file(_selectedImage! as File, fit: BoxFit.fill,)
+                            ? Image.file(_selectedImage!, fit: BoxFit.fill,)
                             : Center(
                                 child: Icon(Icons.add_a_photo))),
                   ),
                   Column(children: [
                     IconButton(
                         onPressed: () {
+                          
                           _pickImage();
                           
                         },
@@ -276,8 +279,8 @@ class _DepartmentPageState extends State<DepartmentPage> {
                        ),SizedBox(height: 25,),
               ElevatedButton(onPressed: (){
                     //print("add button clicked");
-                    final String pickedImage=_selectedImage as String;
-                    editDepartment(id,_editController.text,pickedImage);
+                  
+                    editDepartment(id,_editController.text,_selectedImage!.path);
                     
                     _departmentController.clear();
                     Navigator.pop(context);

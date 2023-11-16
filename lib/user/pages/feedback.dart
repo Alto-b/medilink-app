@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:medilink/admin/db/feedback_functions.dart';
 import 'package:medilink/admin/model/feedback_model.dart';
+import 'package:medilink/guest/model/usermodel.dart';
 import 'package:medilink/styles/custom_widgets.dart';
+import 'package:medilink/user/mainpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FeedbackPage extends StatefulWidget {
   const FeedbackPage({super.key});
@@ -13,15 +17,44 @@ class FeedbackPage extends StatefulWidget {
 }
 
 class _FeedbackPageState extends State<FeedbackPage> {
+
+
   
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _titleController=TextEditingController();
   final TextEditingController _contentController=TextEditingController();
 
+   String userEmail = ''; 
+  UserModel? currentUser;  
+
+   @override
+  void initState() {
+    super.initState();
+    getUser();    
+  }
+
+  Future<void> getUser() async {
+    // Retrieve currentUser email from shared preferences
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+   
+   //if(currentUser != null)
+    userEmail = prefs.getString('currentUser') ?? '';
+    // check the user in Hive using the email
+    final userBox = await Hive.openBox<UserModel>('user_db');
+    currentUser = userBox.values.firstWhere(
+      (user) => user.email == userEmail,
+      //orElse: () => null,
+    );
+    setState(() {}); 
+  }
+
 
   @override
   Widget build(BuildContext context) {
+
+    _titleController.text=currentUser!.email;
+
     return Scaffold(
 
       appBar: AppBar(title: Text("FEEDBACK",style: appBarTitleStyle(),)),
@@ -72,6 +105,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   ElevatedButton(onPressed: (){
                     //submitFeedback();
                     submit();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage(),));
+                    print("successful");
                     // _titleController.clear();
                     // _contentController.clear();
                   }, child: Text("Submit"))

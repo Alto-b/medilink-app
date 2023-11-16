@@ -175,7 +175,8 @@ void calculateAge() {
                       });
                      },
                      decoration: InputDecoration(
-                      prefixIcon: FaIcon(FontAwesomeIcons.marsAndVenus,color: Colors.grey,),
+                      //prefixIcon: FaIcon(FontAwesomeIcons.marsAndVenus,color: Colors.grey,),
+                      prefixIcon: Icon(Icons.arrow_right_rounded,color: Colors.grey,),
                       hintText: "Gender"
                      ),),SizedBox(height: 20,),
       

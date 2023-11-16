@@ -113,9 +113,8 @@ class _HospitalPageState extends State<HospitalPage> {
                       }, 
                       itemCount: hospitalList.length);
                       } ,
-                     
                     ),
-                  )
+                  ),       
                   ],
               ))
             ],

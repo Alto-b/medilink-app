@@ -29,7 +29,7 @@ class _AppointmentViewPageState extends State<AppointmentViewPage> {
         child: Column(
           children: [
             SizedBox(
-                     height: 600,
+                     height: 700,
                     child: ValueListenableBuilder(
                       valueListenable: appointmentListNotifier,
                       builder: (BuildContext ctx, List<AppointmentModel> appointmentList,Widget? child) {

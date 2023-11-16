@@ -24,78 +24,73 @@ class _FeedbackViewPageState extends State<FeedbackViewPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("FEEDBACKS",style: appBarTitleStyle(),),
-        actions: [
-          IconButton(onPressed: (){
-            setState(() {
-              
-            });
-          }, icon: Icon(Icons.refresh_rounded))
-        ],
       ),
 
       //body
-      body: Column(
-        children: [
-          SizedBox(height: 20,),
-
-          SizedBox(
-                  height: 500,
-                  child: ValueListenableBuilder(
-                    valueListenable: feedbackListener,
-                    builder: (BuildContext ctx, List<FeedBackModel> feedbackList,Widget? child) {
-                      
-                    
-                    return ListView.separated(
-                    itemBuilder:((context, index) {
-                      final data=feedbackList[index];
-
-                      return Slidable(
-                              endActionPane: ActionPane(
-                                motion:const DrawerMotion() ,
-                             children: [
-                              //delete
-                              SlidableAction(onPressed: (context) {
-                                    deleteFeedbacks(data.id!);
-                                 },
-         
-                              icon:Icons.delete,
-                              backgroundColor: const Color.fromARGB(255, 248, 3, 3),
-                              ),
-                             ] ),
-                           
-                                      
-    
-                        child: Container(
-                          child: ListTile(
-                            horizontalTitleGap: 20,
-                            contentPadding: EdgeInsets.all(5),
-                            leading: Text("   ${index+1}"),
-                            title: InkWell
-                            (onTap: () { },
-                            child:Text(data.title,style: titleStyle(),)),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(data.date,style: dateTextStyle(),),
-                                SizedBox(height: 10,),
-                                Text(data.content,style: contentTextStyle(),)
-                                
-                              ],
-                            ),  
-                            //trailing: Text(data.date),                        
-                          ),
-                        ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 20,),
+      
+            SizedBox(
+                    height: 690,
+                    child: ValueListenableBuilder(
+                      valueListenable: feedbackListener,
+                      builder: (BuildContext ctx, List<FeedBackModel> feedbackList,Widget? child) {
                         
-                      );
-                    }) , 
-                   separatorBuilder: ((context, index) {
-                    return const Divider();
-                    }), 
-                  itemCount:feedbackList.length);
-                 }, ),
-                ),
-
-        ],
+                      
+                      return ListView.separated(
+                      itemBuilder:((context, index) {
+                        final data=feedbackList[index];
+      
+                        return Slidable(
+                                endActionPane: ActionPane(
+                                  motion:const DrawerMotion() ,
+                               children: [
+                                //delete
+                                SlidableAction(onPressed: (context) {
+                                      deleteFeedbacks(data.id!);
+                                   },
+           
+                                icon:Icons.delete,
+                                backgroundColor: const Color.fromARGB(255, 248, 3, 3),
+                                ),
+                               ] ),
+                             
+                                        
+          
+                          child: Container(
+                            child: ListTile(
+                              horizontalTitleGap: 20,
+                              contentPadding: EdgeInsets.all(5),
+                              leading: Text("   ${index+1}"),
+                              title: InkWell
+                              (onTap: () { },
+                              child:Text(data.title,style: titleStyle(),)),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(data.date,style: dateTextStyle(),),
+                                  SizedBox(height: 10,),
+                                  Text(data.content,style: contentTextStyle(),)
+                                  
+                                ],
+                              ),  
+                              //trailing: Text(data.date),                        
+                            ),
+                          ),
+                          
+                        );
+                      }) , 
+                     separatorBuilder: ((context, index) {
+                      return const Divider();
+                      }), 
+                    itemCount:feedbackList.length);
+                   }, ),
+                  ),
+      
+          ],
+        ),
       ),
     );
   }

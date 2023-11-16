@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:medilink/admin/db/appointment_functions.dart';
 import 'package:medilink/admin/model/appointment_model.dart';
 import 'package:medilink/guest/model/usermodel.dart';
@@ -71,7 +72,7 @@ Future<void> getUser() async {
         child: Column(
           children: [
             SizedBox(
-                    height: 800,
+                    height: 700,
                     child: ValueListenableBuilder(
                       valueListenable: userAppointmentListNotifier,
                       builder: (BuildContext ctx, List<AppointmentModel> userAppointmentList,Widget? child) {
@@ -92,7 +93,10 @@ Future<void> getUser() async {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('${data.date}',style: TextStyle(color: Colors.grey),),
+                               Text(
+                                    DateFormat('dd-MM-yyyy HH:mm').format(data.date),
+                                    style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),
+                                  ),
                                 Text('${data.title} ${data.name} ',style: TextStyle(fontWeight: FontWeight.w700),),
                                 Text("Email : ${data.email}, Mob:${data.mobile}"),
                                 Text("${data.gender} / ${data.marital}"),
