@@ -30,10 +30,7 @@ final  TextEditingController _searchController = TextEditingController();
         child: Center(
           child: Column(
               children: [
-                //logo
-                // Image.network('https://i.ibb.co/YZWjL9Y/Screenshot-2023-10-22-204311-removebg-preview.png',
-                //               width: 200,),
-      
+
                 //search field
                 SizedBox(height: 30,),
                 Row(
@@ -124,7 +121,12 @@ final  TextEditingController _searchController = TextEditingController();
                               contentPadding: EdgeInsets.all(5),
                               //leading: Text("${index+1}"),
                               // title: Align(child: Text(data.dept)),     
-                              title: Align(child: Text(data.hosp,style: TextStyle(fontSize: 20,fontWeight:FontWeight.w500,color: Colors.white ),)),                          
+                              title: Align(child: Text(data.hosp,style: 
+                                    TextStyle(
+                                        fontSize: 20,
+                                        fontWeight:FontWeight.w700,
+                                        color: Colors.white,
+                                         ),)),                          
                             ),
                           ),
                         );

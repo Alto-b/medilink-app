@@ -37,26 +37,7 @@ final  TextEditingController _searchController = TextEditingController();
             padding: const EdgeInsets.all(15.0),
             child: Column(
                 children: [
-                  //logo
-                  // Image.network('https://i.ibb.co/YZWjL9Y/Screenshot-2023-10-22-204311-removebg-preview.png',
-                  //               width: 200,),
-      
                   //search field
-                  SizedBox(height: 30,),
-                  // TextField(
-                  //   controller: _searchController,
-                  //   decoration: InputDecoration(
-                  //       border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(50)
-                  //       ),
-                  //       hintText: "Search specializations"
-                  //   ),
-                  //   onChanged: (query) {
-                  //     setState(() {
-                        
-                  //     });
-                  //   },
-                  // ),
                   Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
@@ -99,7 +80,7 @@ final  TextEditingController _searchController = TextEditingController();
                                   borderRadius: BorderRadius.circular(50),
                                   borderSide: BorderSide.none
                                 ),
-                                hintText: "Search specializations"
+                                hintText: "Search.."
                             ),
                             onChanged: (query) {
                               setState(() {
@@ -111,13 +92,13 @@ final  TextEditingController _searchController = TextEditingController();
                     ),
                   ],
                 ),
-                  SizedBox(height: 40,),
+                  SizedBox(height: 20,),
 
                   //listing specialization
     Padding(
       padding: const EdgeInsets.all(10.0),
       child: SizedBox(
-      height: 500,
+      height: 580,
       child: ValueListenableBuilder(
       valueListenable: deptListNotifier,
       builder: (BuildContext ctx, List<DepartmentModel> departmentList, Widget? child) {
