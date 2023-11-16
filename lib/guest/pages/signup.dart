@@ -45,27 +45,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   bool showError=false;
 
-
-  //a Boolean function to verify if the Data provided is true
-  //  verify() {
-  //   print(emailAuth.validateOtp(
-  //       recipientMail: _emailController.value.text,
-  //       userOtp: _otpController.value.text)
-  //       );
-  // }
-
-  //   void sendOtp() async {
-  //   bool result = await emailAuth.sendOtp(
-  //       recipientMail: _emailController.value.text, otpLength: 5);
-  //   if (result) {
-  //     // using a void function because i am using a 
-  //     // stateful widget and seting the state from here.
-  //     setState(() {
-  //       bool submitValid = true;
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,26 +133,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: "Email"
                   ),
                 ),
-                //otp
-                // TextButton(onPressed: (){
-                //    //sendOtp();
-                // }, child: Text("get OTP")),
-
-                //for otp entry
-                // TextFormField(
-                //   controller: _otpController,
-                //   decoration: InputDecoration(
-                //     hintText: "enter OTP"
-                //   ),
-                // ),
-                //  TextButton(onPressed: (){
-                //    //verify();
-                // }, child: Text("verify OTP")),
                SizedBox(height: 30,),
                //password
                TextFormField(
                   validator:validatepassword ,
-                  keyboardType: TextInputType.emailAddress,
+                  obscureText: true,
                   controller: _passwordController,
                   decoration: InputDecoration(
                     hintText: "Password"
@@ -183,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
                //confirm password
                TextFormField(
                   validator: validatecpassword ,
-                  keyboardType: TextInputType.emailAddress,
+                  obscureText: true,
                   controller: _cpasswordController,
                   decoration: InputDecoration(
                     hintText: "Confirm Password"
@@ -194,12 +158,6 @@ class _SignUpPageState extends State<SignUpPage> {
                ElevatedButton(onPressed: (){
                    //addUserbutton();
                    userCheck(_emailController.text);
-                 
-                   
-
-                   
-                //Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-
                 },
                  style:ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 9, 212, 114),
@@ -216,13 +174,14 @@ class _SignUpPageState extends State<SignUpPage> {
               TextButton(onPressed: (){
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage(),));
               }, child: Text("Already has an account ?")),
-
-              TextButton(onPressed: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context) => MainPage(),));
-              }, child: Text("user")),
-              TextButton(onPressed: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context) => DashBoard(),));
-              }, child: Text("dashboard")),
+              
+            //for test purpose 
+              // TextButton(onPressed: (){
+              //   Navigator.push(context,MaterialPageRoute(builder: (context) => MainPage(),));
+              // }, child: Text("user")),
+              // TextButton(onPressed: (){
+              //   Navigator.push(context,MaterialPageRoute(builder: (context) => DashBoard(),));
+              // }, child: Text("dashboard")),
               
               ],
             ))
@@ -239,36 +198,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-//   void signup() {
-//   // Check if the form is valid
-//   if (_formKey.currentState!.validate() && _passwordController.text==_cpasswordController.text) {
-//     final String fullName = _nameController.text;
-//     final String dateOfBirth = _dobController.text;
-//     final String gender = selectedGender ?? ""; 
-//     final String email = _emailController.text;
-//     final String pass = _passwordController.text;
-//     final String cpass = _cpasswordController.text;
-
-//   final _user=UserModel(fullname: fullName, dob: dateOfBirth, gender: gender, email: email, password: pass);
-//   addUSer(_user);
-//   print("user added");
-//   setState(() {
-    
-//   });
-
-//     // print('Full Name: $fullName');
-//     // print('Date of Birth: $dateOfBirth');
-//     // print('Gender: $gender');
-//     // print('Email: $email');
-//     // print('Password: $pass');
-//     // print('cPassword: $cpass');
-
-//     //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-//   }
-// }
-
-
-
+//to select date
   Future<void> _selectDate(BuildContext context) async {
     //print("dob clicked");
   DateTime selectedDate = DateTime.now(); // Initialize with the current date.

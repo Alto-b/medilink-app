@@ -62,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                       controller: _passwordController,
                       validator: validatepassword,
+                      obscureText: true,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -81,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                     //signup button
                     TextButton(onPressed: (){
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpPage(),));
-                    }, child: Text("signup"))
+                    }, child: Text("New here ? Signup"))
                   ],
                 ))
               ],
